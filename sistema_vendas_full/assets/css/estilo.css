@@ -1,0 +1,27 @@
+*{box-sizing:border-box;font-family:system-ui,Segoe UI,Roboto,Arial}
+a{color:#2563eb;text-decoration:none}
+a:hover{text-decoration:underline}
+body.bg{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f5f7fb}
+.card{width:360px;background:#fff;padding:24px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.card h2{margin:0 0 12px}
+label{display:block;margin-top:10px;color:#333;font-size:14px}
+input, select{width:100%;padding:10px 12px;margin-top:6px;border:1px solid #d9dce3;border-radius:10px}
+button{margin-top:16px;padding:10px 14px;border:0;border-radius:12px;background:#3b82f6;color:#fff;font-weight:600;cursor:pointer}
+button:hover{filter:brightness(0.95)}
+.btn-secondary{background:#6b7280}
+.btn-danger{background:#ef4444}
+.btn-link{background:transparent;color:#2563eb;padding:0}
+.table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}
+.table th,.table td{padding:10px 12px;border-bottom:1px solid #e5e7eb;text-align:left}
+.table th{background:#f3f4f6}
+.wrap{max-width:1100px;margin:24px auto;padding:0 16px}
+.header{display:flex;justify-content:space-between;align-items:center;background:#111827;color:#fff;padding:14px 18px;border-radius:12px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;padding:4px}
+.tile{display:block;background:#fff;border-radius:14px;padding:18px;text-decoration:none;color:#111;border:1px solid #e5e7eb;box-shadow:0 6px 16px rgba(0,0,0,.05)}
+.tile:hover{box-shadow:0 10px 24px rgba(0,0,0,.08)}
+.form-card{background:#fff;padding:16px;border-radius:12px;border:1px solid #e5e7eb;margin:10px 0}
+.back{display:inline-block;margin-top:12px}
+.filters{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin:12px 0}
+.filters input{width:auto}
+.notice{padding:10px 12px;background:#ecfeff;border:1px solid #a5f3fc;color:#155e75;border-radius:10px;margin:8px 0}
+.error{padding:10px 12px;background:#fee2e2;border:1px solid #fecaca;color:#991b1b;border-radius:10px;margin:8px 0}
