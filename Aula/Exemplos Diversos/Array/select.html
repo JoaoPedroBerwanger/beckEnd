@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="select.php" method="post">
+        <B>Selecione seu Processador:</B><br>
+        <input type="radio" name="cpu" value="Pentinum"> Pentinum
+        <input type="radio" name="cpu" value="AMD"> AMD
+        <input type="radio" name="cpu" value="Intel"> Intel
+        <input type="radio" name="cpu" value="Capputino"> Capputino
+        <br>
+        <input type="submit">
+    </form>
+
+    <form action="select.php" method="post">
+       <B>Selecione seu Processador:</B><br>
+       <select name="Processador[]" multiple>
+        <option name="AMD">AMD</option>
+        <option name="Intel">Intel</option>
+        <option name="Pentinum">Pentinum</option>
+        <option name="FX">FX</option>
+        <option name="Dell">Dell</option>
+        <option name="Linux">Linux</option>
+       </select><br>
+       <input type="submit"> 
+    </form>
+
+</body>
+</html>
