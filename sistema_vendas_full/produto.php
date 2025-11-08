@@ -19,24 +19,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar'])) {
   $precoCusto = floatval($_POST['precoCusto'] ?? 0);
   $idMarcaProduto = !empty($_POST['idMarcaProduto']) ? intval($_POST['idMarcaProduto']) : null;
   $idGrupoProduto = !empty($_POST['idGrupoProduto']) ? intval($_POST['idGrupoProduto']) : null;
-  $idnBaixa = isset($_POST['idnBaixa']) ? 1 : 0;
+  $idnBaixa = isset($_POST['idnAtivo']) ? 1 : 0;
 
   if ($idPost > 0) {
     // Atualizar produto existente
     $sql = "UPDATE produto 
-            SET descricao = ?, precoVenda = ?, precoCusto = ?, idMarcaProduto = ?, idGrupoProduto = ?, idnBaixa = ? 
+            SET descricao = ?, precoVenda = ?, precoCusto = ?, idMarcaProduto = ?, idGrupoProduto = ?, idnAtivo = ? 
             WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sddiiii", $descricao, $precoVenda, $precoCusto, $idMarcaProduto, $idGrupoProduto, $idnBaixa, $idPost);
+    $stmt->bind_param("sddiiii", $descricao, $precoVenda, $precoCusto, $idMarcaProduto, $idGrupoProduto, $idnAtivo, $idPost);
     $ok = $stmt->execute();
     echo $ok ? "<div class='notice'>Registro atualizado com sucesso.</div>" :
       "<div class='error'>Erro ao atualizar: {$conn->error}</div>";
   } else {
     // Inserir novo produto
-    $sql = "INSERT INTO produto (descricao, precoVenda, precoCusto, idMarcaProduto, idGrupoProduto, idnBaixa)
+    $sql = "INSERT INTO produto (descricao, precoVenda, precoCusto, idMarcaProduto, idGrupoProduto, idnAtivo)
             VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sddiii", $descricao, $precoVenda, $precoCusto, $idMarcaProduto, $idGrupoProduto, $idnBaixa);
+    $stmt->bind_param("sddiii", $descricao, $precoVenda, $precoCusto, $idMarcaProduto, $idGrupoProduto, $idnAtivo);
     $ok = $stmt->execute();
     echo $ok ? "<div class='notice'>Registro inserido com sucesso.</div>" :
       "<div class='error'>Erro ao inserir: {$conn->error}</div>";
@@ -70,7 +70,7 @@ if ($modo === 'excluir' && $id > 0) {
 
     <?php if ($modo === 'novo' || ($modo === 'editar' && $id > 0)): ?>
       <?php
-      $row = ['descricao' => '', 'precoVenda' => '', 'precoCusto' => '', 'idMarcaProduto' => '', 'idGrupoProduto' => '', 'idnBaixa' => 0];
+      $row = ['descricao' => '', 'precoVenda' => '', 'precoCusto' => '', 'idMarcaProduto' => '', 'idGrupoProduto' => '', 'idnAtivo' => 0];
       if ($modo === 'editar') {
         $q = $conn->query("SELECT * FROM produto WHERE id = $id");
         $row = $q->fetch_assoc();
@@ -116,7 +116,7 @@ if ($modo === 'excluir' && $id > 0) {
           </select>
 
           <label>Ativo para baixa:</label>
-          <input type="checkbox" name="idnBaixa" value="1" <?php echo ($row['idnBaixa'] == 1) ? 'checked' : ''; ?>>
+          <input type="checkbox" name="idnAtivo" value="1" <?php echo ($row['idnAtivo'] == 1) ? 'checked' : ''; ?>>
 
           <button type="submit" name="salvar">Salvar</button>
           <a class="btn-link" href="?">Cancelar</a>
@@ -131,7 +131,7 @@ if ($modo === 'excluir' && $id > 0) {
       <?php
       $res = $conn->query("
         SELECT p.id, p.descricao, m.descricao AS marca, g.descricao AS grupo,
-               p.precoVenda, p.precoCusto, p.idnBaixa
+               p.precoVenda, p.precoCusto, p.idnAtivo
         FROM produto p
         LEFT JOIN marca m ON p.idMarcaProduto = m.id
         LEFT JOIN produto_grupo g ON p.idGrupoProduto = g.id
@@ -161,7 +161,7 @@ if ($modo === 'excluir' && $id > 0) {
                 <td><?php echo htmlspecialchars($r['grupo'] ?? '-'); ?></td>
                 <td><?php echo number_format($r['precoVenda'], 2, ',', '.'); ?></td>
                 <td><?php echo number_format($r['precoCusto'], 2, ',', '.'); ?></td>
-                <td><?php echo $r['idnBaixa'] ? 'Sim' : 'Não'; ?></td>
+                <td><?php echo $r['idnAtivo'] ? 'Sim' : 'Não'; ?></td>
                 <td>
                   <a href="?modo=editar&id=<?php echo $r['id']; ?>">Editar</a> |
                   <a href="?modo=excluir&id=<?php echo $r['id']; ?>" onclick="return confirm('Excluir registro?')">Excluir</a>

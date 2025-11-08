@@ -1,27 +1,176 @@
-*{box-sizing:border-box;font-family:system-ui,Segoe UI,Roboto,Arial}
-a{color:#2563eb;text-decoration:none}
-a:hover{text-decoration:underline}
-body.bg{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f5f7fb}
-.card{width:360px;background:#fff;padding:24px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
-.card h2{margin:0 0 12px}
-label{display:block;margin-top:10px;color:#333;font-size:14px}
-input, select{width:100%;padding:10px 12px;margin-top:6px;border:1px solid #d9dce3;border-radius:10px}
-button{margin-top:16px;padding:10px 14px;border:0;border-radius:12px;background:#3b82f6;color:#fff;font-weight:600;cursor:pointer}
-button:hover{filter:brightness(0.95)}
-.btn-secondary{background:#6b7280}
-.btn-danger{background:#ef4444}
-.btn-link{background:transparent;color:#2563eb;padding:0}
-.table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}
-.table th,.table td{padding:10px 12px;border-bottom:1px solid #e5e7eb;text-align:left}
-.table th{background:#f3f4f6}
-.wrap{max-width:1100px;margin:24px auto;padding:0 16px}
-.header{display:flex;justify-content:space-between;align-items:center;background:#111827;color:#fff;padding:14px 18px;border-radius:12px;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;padding:4px}
-.tile{display:block;background:#fff;border-radius:14px;padding:18px;text-decoration:none;color:#111;border:1px solid #e5e7eb;box-shadow:0 6px 16px rgba(0,0,0,.05)}
-.tile:hover{box-shadow:0 10px 24px rgba(0,0,0,.08)}
-.form-card{background:#fff;padding:16px;border-radius:12px;border:1px solid #e5e7eb;margin:10px 0}
-.back{display:inline-block;margin-top:12px}
-.filters{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin:12px 0}
-.filters input{width:auto}
-.notice{padding:10px 12px;background:#ecfeff;border:1px solid #a5f3fc;color:#155e75;border-radius:10px;margin:8px 0}
-.error{padding:10px 12px;background:#fee2e2;border:1px solid #fecaca;color:#991b1b;border-radius:10px;margin:8px 0}
+/* Layout Padrão */
+* {
+  box-sizing: border-box;
+  font-family: system-ui, Segoe UI, Roboto, Arial;
+  transition: all 0.15s ease;
+}
+
+/* Links gerais */
+a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Fundo da tela de login */
+body.bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f7fb;
+}
+
+/* Card centralizado */
+.card {
+  width: 360px;
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.card h2 {
+  margin: 0 0 12px;
+}
+
+/* Campos de formulário */
+label {
+  display: block;
+  margin-top: 10px;
+  color: #333;
+  font-size: 14px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border: 1px solid #d9dce3;
+  border-radius: 10px;
+}
+
+/* Botões */
+button,
+a.button {
+  flex: 1;
+  height: 44px;
+  border: none;
+  border-radius: 12px;
+  background: #3b82f6;
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 14px; /* 👈 garante tamanho igual */
+  line-height: 1; /* 👈 centraliza o texto perfeitamente */
+  font-family: inherit; /* 👈 usa a mesma fonte do restante */
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button:hover,
+a.button:hover {
+  background: #2563eb;
+}
+
+button:active,
+a.button:active {
+  transform: scale(0.98);
+}
+
+/* Ações do Login */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* Mensagens */
+.error {
+  padding: 10px 12px;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  border-radius: 10px;
+  margin: 8px 0;
+}
+
+.notice {
+  padding: 10px 12px;
+  background: #ecfeff;
+  border: 1px solid #a5f3fc;
+  color: #155e75;
+  border-radius: 10px;
+  margin: 8px 0;
+}
+
+/* Layout das demais telas, com limitador de tamanho lateral e centralizado */
+.wrap {
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 0 16px;
+} 
+
+/* Cabeçalho com nome da página e o botão sair */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111827;
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+} 
+
+/* Grid das opções de cadastro e relatório, com as opções no estilo cartãoe um efeito de hover */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 4px;
+}
+
+.tile {
+  display: block;
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px;
+  text-decoration: none;
+  color: #111;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.tile:hover {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+} 
+
+/* Tabelas dos relatórios */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table th, .table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.table th {
+  background: #f3f4f6;
+} 
