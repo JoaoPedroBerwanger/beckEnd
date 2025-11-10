@@ -11,13 +11,13 @@
     <div class="card">
       <h2>Acesso ao Sistema</h2>
       <div id="erro" class="error" style="display: none"></div>
+      <div id="ok" class="notice" style="display: none"></div>
 
       <form method="POST" action="funcoes.php">
         <input type="hidden" name="acao" value="entrar" />
         <label for="login">Usuário</label>
         <input type="text" id="login" name="login" required />
-        <div id="ok" class="notice" style="display: none"></div>
-
+        
         <label for="senha">Senha</label>
         <input type="password" id="senha" name="senha" required />
 
@@ -37,7 +37,7 @@
       }
       if (p.get("cad") === "ok") {
         const o = document.getElementById("ok");
-        o.textContent = "Usuário cadastrado com sucesso! Faça login.";
+        o.textContent = "Usuário cadastrado com sucesso!";
         o.style.display = "block";
       }
     </script>

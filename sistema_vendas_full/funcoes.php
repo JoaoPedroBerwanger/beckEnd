@@ -44,7 +44,7 @@ function inserirUsuario()
   $stmt->store_result();
 
   if ($stmt->num_rows > 0) {
-    header("Location: cadastrar_usuario.php?erro=login_duplicado");
+    header("Location: cadastrar_usuario.php?erro=loginDuplicado");
     exit;
   }
   $stmt->close();

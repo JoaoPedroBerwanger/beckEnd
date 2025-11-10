@@ -27,7 +27,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     case '1':
                         echo "Preencha todos os campos.";
                         break;
-                    case 'login_duplicado':
+                    case 'loginDuplicado':
                         echo "Este login já está em uso.";
                         break;
                     case 'db':
