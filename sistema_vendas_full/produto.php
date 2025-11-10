@@ -1,4 +1,5 @@
 <?php
+
 require_once 'conexao.php';
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
@@ -11,7 +12,6 @@ if (!isset($_SESSION['usuario_id'])) {
 $modo = $_GET['modo'] ?? 'lista';
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// === INSERÇÃO / EDIÇÃO ===
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar'])) {
   $idPost = intval($_POST['id'] ?? 0);
   $descricao = trim($_POST['descricao'] ?? '');
@@ -22,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar'])) {
   $idnBaixa = isset($_POST['idnAtivo']) ? 1 : 0;
 
   if ($idPost > 0) {
-    // Atualizar produto existente
     $sql = "UPDATE produto 
             SET descricao = ?, precoVenda = ?, precoCusto = ?, idMarcaProduto = ?, idGrupoProduto = ?, idnAtivo = ? 
             WHERE id = ?";
@@ -32,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar'])) {
     echo $ok ? "<div class='notice'>Registro atualizado com sucesso.</div>" :
       "<div class='error'>Erro ao atualizar: {$conn->error}</div>";
   } else {
-    // Inserir novo produto
     $sql = "INSERT INTO produto (descricao, precoVenda, precoCusto, idMarcaProduto, idGrupoProduto, idnAtivo)
             VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
@@ -45,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar'])) {
   $modo = 'lista';
 }
 
-// === EXCLUSÃO ===
 if ($modo === 'excluir' && $id > 0) {
   $conn->query("DELETE FROM produto WHERE id = $id");
   echo "<div class='notice'>Registro excluído.</div>";

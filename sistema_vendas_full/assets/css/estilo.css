@@ -32,6 +32,7 @@ body.bg {
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
+
 .card h2 {
   margin: 0 0 12px;
 }
@@ -44,8 +45,7 @@ label {
   font-size: 14px;
 }
 
-input,
-select {
+input, select {
   width: 100%;
   padding: 10px 12px;
   margin-top: 6px;
@@ -54,8 +54,7 @@ select {
 }
 
 /* Botões */
-button,
-a.button {
+button, a.button {
   flex: 1;
   height: 44px;
   border: none;
@@ -77,13 +76,11 @@ a.button {
   transition: background 0.2s ease, transform 0.1s ease;
 }
 
-button:hover,
-a.button:hover {
+button:hover, a.button:hover {
   background: #2563eb;
 }
 
-button:active,
-a.button:active {
+button:active, a.button:active {
   transform: scale(0.98);
 }
 

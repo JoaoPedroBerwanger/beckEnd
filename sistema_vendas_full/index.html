@@ -2,8 +2,8 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Sistema de Vendas - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sistema - Login</title>
     <link rel="stylesheet" href="assets/css/estilo.css" />
   </head>
 
@@ -15,6 +15,7 @@
 
       <form method="POST" action="funcoes.php">
         <input type="hidden" name="acao" value="entrar" />
+        
         <label for="login">Usuário</label>
         <input type="text" id="login" name="login" required />
         
@@ -28,18 +29,6 @@
       </form>
     </div>
 
-    <script>
-      const p = new URLSearchParams(location.search);
-      if (p.get("erro") === "1") {
-        const e = document.getElementById("erro");
-        e.textContent = "Usuário ou senha inválidos.";
-        e.style.display = "block";
-      }
-      if (p.get("cad") === "ok") {
-        const o = document.getElementById("ok");
-        o.textContent = "Usuário cadastrado com sucesso!";
-        o.style.display = "block";
-      }
-    </script>
+    <script src="assets/js/index.js"></script>
   </body>
 </html>
