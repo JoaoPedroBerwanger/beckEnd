@@ -92,22 +92,33 @@ button:active, a.button:active {
 }
 
 /* Mensagens */
+.error, .notice {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 320px;
+  max-width: 500px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 15px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  z-index: 9999;
+  opacity: 0;
+  animation: slideDown 0.4s ease forwards, fadeOut 4s ease 3s forwards;
+}
+
 .error {
-  padding: 10px 12px;
-  background: #fee2e2;
-  border: 1px solid #fecaca;
-  color: #991b1b;
-  border-radius: 10px;
-  margin: 8px 0;
+  background-color: #ffe6e6;
+  border: 1px solid #ff4d4d;
+  color: #a60000;
 }
 
 .notice {
-  padding: 10px 12px;
-  background: #ecfeff;
-  border: 1px solid #a5f3fc;
-  color: #155e75;
-  border-radius: 10px;
-  margin: 8px 0;
+  background-color: #e6f9f0;
+  border: 1px solid #00c853;
+  color: #007e33;
 }
 
 /* Layout das demais telas, com limitador de tamanho lateral e centralizado */

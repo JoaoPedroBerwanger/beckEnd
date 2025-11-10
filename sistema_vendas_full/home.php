@@ -22,7 +22,7 @@ $nome = $_SESSION['usuario_nome'];
   <body>
     <div class="wrap">
       <div class="header">
-        <div>Bem-vindo, <?php echo htmlspecialchars($nome); ?></div>
+        <div>Bem vindo, <?php echo htmlspecialchars($nome); ?></div>
         <form method="POST" action="funcoes.php" style="margin: 0;">
           <input type="hidden" name="acao" value="logout" />
           <button type="submit">Sair</button>
