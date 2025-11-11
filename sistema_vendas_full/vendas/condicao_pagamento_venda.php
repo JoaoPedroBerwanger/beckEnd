@@ -1,4 +1,4 @@
-<?php require_once 'conexao.php';
+<?php require_once 'funcoes.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['produto_id'], $_POST['usuario_id'], $_POST['preco_produto'], $_POST['quantidade'], $_POST['total'])) {
   header('Location: vender.php');
   exit();
@@ -45,7 +45,7 @@ $usuario_nome = ($conn->query("SELECT nome FROM usuario WHERE id=$usuario_id")->
         <input type="number" name="parcelas" id="parcelas" min="1" onchange="calcularParcelas()">
         <div id="detalhes_parcelas"></div>
       </div>
-      <button type="submit" style="margin-top:10px">Finalizar Venda</button>
+      <button type="button" style="margin-top:10px">Finalizar Venda</button>
     </form>
   </div>
   <script>

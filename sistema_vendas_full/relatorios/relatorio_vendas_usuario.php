@@ -1,23 +1,27 @@
-<?php require_once 'conexao.php'; ?>
+<?php 
+require_once '../funcoes.php'; 
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
   <title>Relatório: Vendas por Usuário</title>
-  <link rel="stylesheet" href="assets/css/estilo.css">
+  <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 
 <body>
   <div class="wrap">
     <div class="header">
       <div>Relatório: Vendas por Usuário</div>
-      <div><a class="btn-link" href="home.php">⟵ Voltar</a></div>
+      <div><a class="button" href="../home.php">⟵ Voltar</a></div>
     </div>
     <?php
     $sql = "SELECT u.id, u.nome, COUNT(v.id) AS qtd_vendas, COALESCE(SUM(v.totalVenda),0) AS total
             FROM usuario u
             LEFT JOIN vendas v ON v.idUsuario = u.id
+            WHERE v.totalVenda > 0
             GROUP BY u.id, u.nome
             ORDER BY total DESC";
     $res = $conn->query($sql);
@@ -31,7 +35,7 @@
     }
     echo "</tbody></table>";
     ?>
-    <p><a class="back" href="home.php">⟵ Voltar ao Menu</a></p>
+    <p><a class="button" href="../home.php">⟵ Voltar ao Menu</a></p>
   </div>
 </body>
 

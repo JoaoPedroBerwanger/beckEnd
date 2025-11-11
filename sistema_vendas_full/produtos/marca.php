@@ -1,5 +1,5 @@
 <?php
-include "conexao.php";
+include "../funcoes.php";
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["descricao"])) {
   <form method="POST" action="">
     <label>Descrição:</label>
     <input type="text" name="descricao" required>
-    <button type="submit">Salvar</button>
+    <button type="button">Salvar</button>
   </form>
 
   <h3>Marcas Cadastradas</h3>
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["descricao"])) {
     ?>
   </table>
 
-  <a class="back" href="home.php">⟵ Voltar ao Menu</a>
+  <a class="button" href="../home.php">⟵ Voltar ao Menu</a>
 </div>
 </body>
 </html>

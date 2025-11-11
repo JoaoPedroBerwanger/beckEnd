@@ -41,7 +41,7 @@ function cadastrarUsuario()
   $senha = trim($_POST['senha'] ?? '');
 
   if ($login === '' || $nome === '' || $senha === '') {
-    header("Location: cadastrar_usuario.php?erro=1");
+    header("Location: usuarios/usuario_form.php?erro=1");
     exit;
   }
 
@@ -56,13 +56,12 @@ function cadastrarUsuario()
           VALUES ('$nome', '$login', '$senhaMd5', 1)";
 
   if ($conn->query($sql)) {
-    header("Location: index.html?cad=ok");
+    header("Location: usuarios/usuario_consultar.php?cad=ok");
   } else {
     header("Location: usuarios/usuario_form.php?erro=db");
   }
   exit;
 }
-
 
 function entrarSistema()
 {
@@ -84,7 +83,7 @@ function entrarSistema()
   $res = $conn->query($sql);
 
   if (!$res || $res->num_rows === 0) {
-    header("Location: index.html?erro=1");
+    header("Location: index.html?erro=invalido");
     exit;
   }
 
@@ -149,13 +148,13 @@ function inserirUsuario() {
   $senha = trim($_POST['senha']);
 
   if ($login === '' || $nome === '' || $senha === '') {
-    header("Location: cadastrar_usuario.php?erro=campos");
+    header("Location: usuarios/usuario_form.php?erro=campos");
     exit;
   }
 
   $check = $conn->query("SELECT id FROM usuario WHERE login='$login'");
   if ($check && $check->num_rows > 0) {
-    header("Location: cadastrar_usuario.php?erro=loginDuplicado");
+    header("Location: usuarios/usuario_form.php?erro=loginDuplicado");
     exit;
   }
 
@@ -256,4 +255,76 @@ function excluirGrupoCliente() {
   $conn->query("DELETE FROM cliente_grupo WHERE id=$id");
   header("Location: cliente_grupo.php?msg=ok");
   exit;
+}
+
+function listarProdutos() {
+  global $conn;
+  $sql = "
+    SELECT p.id, p.descricao, m.descricao AS marca, g.descricao AS grupo,
+           p.precoVenda, p.precoCusto, p.idnAtivo
+    FROM produto p
+    LEFT JOIN marca m ON p.idMarcaProduto = m.id
+    LEFT JOIN produto_grupo g ON p.idGrupoProduto = g.id
+    ORDER BY p.descricao
+  ";
+  $res = $conn->query($sql);
+  return $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
+}
+
+function obterProduto($id) {
+  global $conn;
+  $id = intval($id);
+  $sql = "SELECT * FROM produto WHERE id = $id";
+  $res = $conn->query($sql);
+  return $res && $res->num_rows ? $res->fetch_assoc() : null;
+}
+
+function salvarProduto($d) {
+  global $conn;
+
+  $descricao = $conn->real_escape_string($d['descricao']);
+  $precoVenda = floatval($d['precoVenda']);
+  $precoCusto = floatval($d['precoCusto']);
+  $idMarca = $d['idMarcaProduto'] ? intval($d['idMarcaProduto']) : 'NULL';
+  $idGrupo = $d['idGrupoProduto'] ? intval($d['idGrupoProduto']) : 'NULL';
+  $idnAtivo = intval($d['idnAtivo']);
+
+  if (!empty($d['id']) && $d['id'] > 0) {
+    $id = intval($d['id']);
+    $sql = "
+      UPDATE produto
+      SET descricao = '$descricao',
+          precoVenda = $precoVenda,
+          precoCusto = $precoCusto,
+          idMarcaProduto = $idMarca,
+          idGrupoProduto = $idGrupo,
+          idnAtivo = $idnAtivo
+      WHERE id = $id
+    ";
+  } else {
+    $sql = "
+      INSERT INTO produto (descricao, precoVenda, precoCusto, idMarcaProduto, idGrupoProduto, idnAtivo)
+      VALUES ('$descricao', $precoVenda, $precoCusto, $idMarca, $idGrupo, $idnAtivo)
+    ";
+  }
+
+  return $conn->query($sql);
+}
+
+function excluirProduto($id) {
+  global $conn;
+  $id = intval($id);
+  return $conn->query("DELETE FROM produto WHERE id = $id");
+}
+
+function listarMarcas() {
+  global $conn;
+  $res = $conn->query("SELECT id, descricao FROM marca ORDER BY descricao");
+  return $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
+}
+
+function listarGruposProduto() {
+  global $conn;
+  $res = $conn->query("SELECT id, descricao FROM produto_grupo ORDER BY descricao");
+  return $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
 }

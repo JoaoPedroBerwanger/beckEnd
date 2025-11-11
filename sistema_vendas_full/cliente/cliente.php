@@ -24,7 +24,7 @@ $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
   <div class="wrap">
     <div class="header">
       <div>Clientes</div>
-      <div><a class="btn-link" href="home.php">⟵ Voltar</a></div>
+      <div><a class="button" href="../home.php">⟵ Voltar</a></div>
     </div>
 
     <?php if ($modo === 'novo' || ($modo === 'editar' && $id > 0)): ?>
@@ -64,7 +64,7 @@ $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
           <?php endif; ?>
 
           <div class="actions">
-            <button type="submit">Salvar</button>
+            <button type="button">Salvar</button>
             <a class="button" href="cliente.php">Cancelar</a>
           </div>
         </form>
@@ -73,7 +73,7 @@ $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
     <?php if ($modo === 'lista'): ?>
       <div class="form-card">
-        <a class="btn-link" href="?modo=novo">+ Novo</a>
+        <a class="button" href="?modo=novo">+ Novo</a>
       </div>
 
       <?php $res = $conn->query("SELECT id, nome, cpfCnpj, email, idGrupoCliente, idnAtivo FROM cliente ORDER BY id"); ?>
@@ -104,7 +104,7 @@ $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
                   <form method="POST" action="funcoes.php" style="display:inline;">
                     <input type="hidden" name="acao" value="delCliente">
                     <input type="hidden" name="id" value="<?php echo $r['id']; ?>">
-                    <button type="submit" onclick="return confirm('Excluir registro?')" class="link-btn">Excluir</button>
+                    <button type="button" onclick="return confirm('Excluir registro?')" class="link-btn">Excluir</button>
                   </form>
                 </td>
               </tr>

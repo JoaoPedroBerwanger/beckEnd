@@ -28,6 +28,8 @@ $res = $conn->query("SELECT id, nome, login, idnAtivo FROM usuario ORDER BY id")
 
     <div class="form-card">
       <a class="button" href="usuario_form.php">+ Novo</a>
+          <div id="erro" class="error" style="display: none"></div>
+          <div id="ok" class="notice" style="display: none"></div>
     </div>
 
     <table class="table">
@@ -49,7 +51,7 @@ $res = $conn->query("SELECT id, nome, login, idnAtivo FROM usuario ORDER BY id")
                 <form method="POST" action="../funcoes.php" style="display:inline;">
                   <input type="hidden" name="acao" value="delUsuario">
                   <input type="hidden" name="id" value="<?= $r['id'] ?>">
-                  <button type="submit" onclick="return confirm('Excluir este usuário?')" class="link-btn">Excluir</button>
+                  <button type="button" onclick="return confirm('Excluir este usuário?')" class="link-btn">Excluir</button>
                 </form>
               </td>
             </tr>

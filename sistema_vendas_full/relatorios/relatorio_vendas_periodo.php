@@ -1,23 +1,26 @@
-<?php require_once 'conexao.php'; ?>
+<?php 
+require_once '../funcoes.php'; 
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
   <title>Relatório: Vendas por Período</title>
-  <link rel="stylesheet" href="assets/css/estilo.css">
+  <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 
 <body>
   <div class="wrap">
     <div class="header">
       <div>Relatório: Vendas por Período</div>
-      <div><a class="btn-link" href="home.php">⟵ Voltar</a></div>
+      <div><a class="button" href="../home.php">⟵ Voltar</a></div>
     </div>
     <form method="GET" class="filters">
       <div><label>De:</label><input type="date" name="de" required></div>
       <div><label>Até:</label><input type="date" name="ate" required></div>
-      <div><button type="submit">Filtrar</button></div>
+      <div><button type="button">Filtrar</button></div>
     </form>
     <?php
     if (isset($_GET['de'], $_GET['ate'])) {
@@ -42,7 +45,7 @@
       echo "<div class='notice'>Selecione o período e clique em Filtrar.</div>";
     }
     ?>
-    <p><a class="back" href="home.php">⟵ Voltar ao Menu</a></p>
+    <p><a class="button" href="../home.php">⟵ Voltar ao Menu</a></p>
   </div>
 </body>
 

@@ -1,17 +1,15 @@
 const p = new URLSearchParams(location.search);
 
 if (p.get("erro")) {
-  const div = document.createElement("div");
-  div.className = "error";
+  const div = document.getElementById("erro");
   div.textContent = traduzErro(p.get("erro"));
-  document.body.prepend(div);
+  div.style.display = "block";
 }
 
 if (p.get("cad") === "ok" || p.get("msg") === "ok") {
-  const div = document.createElement("div");
-  div.className = "notice";
+  const div = document.getElementById("ok");
   div.textContent = traduzSucesso(p.get("cad") || p.get("msg"));
-  document.body.prepend(div);
+  div.style.display = "block";
 }
 
 function traduzErro(codigo) {

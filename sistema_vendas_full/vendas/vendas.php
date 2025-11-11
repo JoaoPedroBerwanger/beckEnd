@@ -1,4 +1,4 @@
-<?php require_once "conexao.php";
+<?php require_once "funcoes.php";
 $sql = "SELECT v.id AS venda_id, v.numero, v.totalVenda, v.dataVenda, u.nome AS usuario_nome
         FROM vendas v LEFT JOIN usuario u ON v.idUsuario = u.id ORDER BY v.id DESC";
 $res = $conn->query($sql); ?>
@@ -15,7 +15,7 @@ $res = $conn->query($sql); ?>
         <div class="wrap">
                 <div class="header">
                         <div>Listagem de Vendas</div>
-                        <div><a class="btn-link" href="home.php">⟵ Voltar</a></div>
+                        <div><a class="button" href="../home.php">⟵ Voltar</a></div>
                 </div>
                 <table class="table">
                         <thead>
@@ -42,7 +42,7 @@ $res = $conn->query($sql); ?>
                                         </tr><?php endif; ?>
                         </tbody>
                 </table>
-                <p><a class="back" href="home.php">⟵ Voltar ao Menu</a></p>
+                <p><a class="button" href="../home.php">⟵ Voltar ao Menu</a></p>
         </div>
 </body>
 

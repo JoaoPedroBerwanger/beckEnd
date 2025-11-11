@@ -1,5 +1,5 @@
 <?php 
-require_once 'conexao.php'; 
+require_once 'funcoes.php'; 
 ?>
 
 <!DOCTYPE html>
@@ -61,12 +61,12 @@ require_once 'conexao.php';
             value='<?php echo $modo === "editar" ? htmlspecialchars($row["descricao"] ?? "") : ""; ?>' required>
           <label>Ativo (1/0)</label><input type='text' name='idnAtivo'
             value='<?php echo $modo === "editar" ? htmlspecialchars($row["idnAtivo"] ?? "") : ""; ?>' required>
-          <button type='submit' name='salvar'>Salvar</button> <a class='btn-link' href='?'>Cancelar</a>
+          <button type='button' name='salvar'>Salvar</button> <a class='button' href='?'>Cancelar</a>
         </form>
       </div>
     <?php endif; ?>
     <?php if ($modo === 'lista'): ?>
-      <div class='form-card'><a class='btn-link' href='?modo=novo'>+ Novo</a></div>
+      <div class='form-card'><a class='button' href='?modo=novo'>+ Novo</a></div>
       <?php $res = $conn->query("SELECT id, descricao, idnAtivo FROM condicao_pagamento ORDER BY descricao"); ?>
       <table class='table'>
         <thead>

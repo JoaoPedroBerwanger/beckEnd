@@ -1,4 +1,4 @@
-<?php require_once 'conexao.php';
+<?php require_once '../funcoes.php';
 $usuarios = $conn->query("SELECT id,nome FROM usuario WHERE idnAtivo=1 ORDER BY nome");
 $produtos = $conn->query("SELECT id,descricao,precoVenda FROM produto WHERE idnAtivo=1 ORDER BY descricao"); ?>
 <!DOCTYPE html>
@@ -7,7 +7,7 @@ $produtos = $conn->query("SELECT id,descricao,precoVenda FROM produto WHERE idnA
 <head>
     <meta charset="UTF-8">
     <title>Realizar Venda</title>
-    <link rel="stylesheet" href="assets/css/estilo.css">
+    <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 
 <body class="bg">
@@ -29,7 +29,7 @@ $produtos = $conn->query("SELECT id,descricao,precoVenda FROM produto WHERE idnA
             <label>Preço do Produto</label><input type="text" id="preco_produto" name="preco_produto" readonly>
             <label>Quantidade</label><input type="number" id="quantidade" name="quantidade" min="1" value="1" required onchange="at()">
             <label>Total</label><input type="text" id="total" name="total" readonly>
-            <button type="submit">Continuar</button>
+            <button type="button">Continuar</button>
         </form>
     </div>
     <script>

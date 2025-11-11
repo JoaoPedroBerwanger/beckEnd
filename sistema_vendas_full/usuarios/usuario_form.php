@@ -22,6 +22,7 @@ if ($id > 0) {
 
 <body class="bg">
   <div class="card">
+    <div id="loginDuplicado" class="error" style="display: none"></div>
     <h2><?= $modo === 'editar' ? 'Editar Usuário' : 'Novo Usuário' ?></h2>
 
     <form method="POST" action="../funcoes.php">
@@ -48,7 +49,7 @@ if ($id > 0) {
 
       <div class="actions">
         <input type="hidden" name="acao" value="<?= $modo === 'editar' ? 'editarUsuario' : 'addUsuario' ?>">
-        <button type="submit">Salvar</button>
+        <button type="button">Salvar</button>
         <a class="button" href="usuario_consulta.php">Cancelar</a>
       </div>
     </form>

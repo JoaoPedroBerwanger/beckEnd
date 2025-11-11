@@ -25,33 +25,33 @@ $nome = $_SESSION['usuario_nome'];
         <div>Bem vindo, <?php echo htmlspecialchars($nome); ?></div>
         <form method="POST" action="funcoes.php" style="margin: 0;">
           <input type="hidden" name="acao" value="logout" />
-          <button type="submit">Sair</button>
+          <button type="button">Sair</button>
         </form>
       </div>
 
       <h3>Cadastros</h3>
       <div class="grid">
         <a href="usuarios/usuario_consulta.php" class="tile">Usuários</a>
-        <a href="cliente.php" class="tile">Clientes</a>
-        <a href="produto.php" class="tile">Produtos</a>
-        <a href="marca.php" class="tile">Marcas</a>
-        <a href="produto_grupo.php" class="tile">Grupos de Produto</a>
-        <a href="condicao_pagamento.php" class="tile">Condições de Pagamento</a>
+        <a href="cliente/cliente_consulta.php" class="tile">Clientes</a>
+        <a href="produtos/produto_consulta.php" class="tile">Produtos</a>
+        <a href="produtos/marca_consulta.php" class="tile">Marcas</a>
+        <a href="produtos/prod_grupo_consultas.php" class="tile">Grupos de Produto</a>
+        <a href="vendas/condicao_pagamento.php" class="tile">Condições de Pagamento</a>
       </div>
 
       <h3>Vendas</h3>
       <div class="grid">
-        <a href="vender.php" class="tile">Realizar Venda</a>
-        <a href="vendas.php" class="tile">Listar Vendas</a>
+        <a href="vendas/vender.php" class="tile">Realizar Venda</a>
+        <a href="vendas/vendas.php" class="tile">Listar Vendas</a>
       </div>
 
       <h3>Relatórios</h3>
       <div class="grid">
-        <a href="relatorio_vendas_periodo.php" class="tile">Vendas por Período</a>
-        <a href="relatorio_vendas_cliente.php" class="tile">Vendas por Cliente</a>
-        <a href="relatorio_produtos_mais_vendidos.php" class="tile">Produtos mais Vendidos</a>
-        <a href="relatorio_vendas_usuario.php" class="tile">Vendas por Usuário</a>
-        <a href="relatorio_clientes_grupo.php" class="tile">Clientes por Grupo</a>
+        <a href="relatorios/relatorio_vendas_periodo.php" class="tile">Vendas por Período</a>
+        <a href="relatorios/relatorio_vendas_cliente.php" class="tile">Vendas por Cliente</a>
+        <a href="relatorios/relatorio_produtos_mais_vendidos.php" class="tile">Produtos mais Vendidos</a>
+        <a href="relatorios/relatorio_vendas_usuario.php" class="tile">Vendas por Usuário</a>
+        <a href="relatorios/relatorio_clientes_grupo.php" class="tile">Clientes por Grupo</a>
       </div>
 
        <div style="margin-top: 24px;">

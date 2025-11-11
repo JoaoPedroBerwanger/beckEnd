@@ -1,4 +1,4 @@
-<?php require_once 'conexao.php';
+<?php require_once 'funcoes.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['produto_id'], $_POST['usuario_id'], $_POST['preco_produto'], $_POST['quantidade'], $_POST['total'], $_POST['condicao_pagamento'])) {
   die("Erro ao enviar os dados.");
 }
