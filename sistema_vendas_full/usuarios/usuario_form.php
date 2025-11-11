@@ -25,7 +25,6 @@ if ($id > 0) {
     <h2><?= $modo === 'editar' ? 'Editar Usuário' : 'Novo Usuário' ?></h2>
 
     <form method="POST" action="../funcoes.php">
-      <input type="hidden" name="acao" value="<?= $modo === 'editar' ? 'editarUsuario' : 'addUsuario' ?>">
       <?php if ($modo === 'editar'): ?>
         <input type="hidden" name="id" value="<?= $id ?>">
       <?php endif; ?>
@@ -48,6 +47,7 @@ if ($id > 0) {
       <?php endif; ?>
 
       <div class="actions">
+        <input type="hidden" name="acao" value="<?= $modo === 'editar' ? 'editarUsuario' : 'addUsuario' ?>">
         <button type="submit">Salvar</button>
         <a class="button" href="usuario_consulta.php">Cancelar</a>
       </div>

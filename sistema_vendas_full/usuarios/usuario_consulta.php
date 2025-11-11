@@ -1,7 +1,7 @@
 <?php
+
 require_once '../funcoes.php';
 
-// Protege o acesso
 if (!isset($_SESSION['usuario_id'])) {
   header("Location: ../index.html");
   exit;
@@ -9,6 +9,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
 $res = $conn->query("SELECT id, nome, login, idnAtivo FROM usuario ORDER BY id");
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -22,11 +23,11 @@ $res = $conn->query("SELECT id, nome, login, idnAtivo FROM usuario ORDER BY id")
   <div class="wrap">
     <div class="header">
       <div>Usuários</div>
-      <div><a class="btn-link" href="../home.php">⟵ Voltar</a></div>
+      <div><a class="button" href="../home.php">⟵ Voltar</a></div>
     </div>
 
     <div class="form-card">
-      <a class="btn-link" href="usuario_form.php">+ Novo</a>
+      <a class="button" href="usuario_form.php">+ Novo</a>
     </div>
 
     <table class="table">
@@ -44,7 +45,7 @@ $res = $conn->query("SELECT id, nome, login, idnAtivo FROM usuario ORDER BY id")
               <td><?= htmlspecialchars($r['login']) ?></td>
               <td><?= $r['idnAtivo'] ? 'Sim' : 'Não' ?></td>
               <td>
-                <a href="usuario_form.php?id=<?= $r['id'] ?>">Editar</a> |
+                <a class="button" href="usuario_form.php?id=<?= $r['id'] ?>">Editar</a> |
                 <form method="POST" action="../funcoes.php" style="display:inline;">
                   <input type="hidden" name="acao" value="delUsuario">
                   <input type="hidden" name="id" value="<?= $r['id'] ?>">

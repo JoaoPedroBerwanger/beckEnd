@@ -31,7 +31,7 @@ $nome = $_SESSION['usuario_nome'];
 
       <h3>Cadastros</h3>
       <div class="grid">
-        <a href="usuario.php" class="tile">Usuários</a>
+        <a href="usuarios/usuario_consulta.php" class="tile">Usuários</a>
         <a href="cliente.php" class="tile">Clientes</a>
         <a href="produto.php" class="tile">Produtos</a>
         <a href="marca.php" class="tile">Marcas</a>

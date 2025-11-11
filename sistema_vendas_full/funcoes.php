@@ -45,10 +45,9 @@ function cadastrarUsuario()
     exit;
   }
 
-  // Verifica duplicidade
   $check = $conn->query("SELECT id FROM usuario WHERE login = '$login'");
   if ($check && $check->num_rows > 0) {
-    header("Location: cadastrar_usuario.php?erro=loginDuplicado");
+    header("Location: usuarios/usuario_form.php?erro=loginDuplicado");
     exit;
   }
 
@@ -59,7 +58,7 @@ function cadastrarUsuario()
   if ($conn->query($sql)) {
     header("Location: index.html?cad=ok");
   } else {
-    header("Location: cadastrar_usuario.php?erro=db");
+    header("Location: usuarios/usuario_form.php?erro=db");
   }
   exit;
 }
@@ -128,7 +127,7 @@ function atualizarUsuario() {
   }
 
   if ($conn->query($sql)) {
-    header("Location: usuario.php?msg=ok");
+    header("Location: usuarios/usuario_consulta.php?msg=ok");
   } else {
     echo "<div class='error'>Erro ao atualizar: {$conn->error}</div>";
   }
@@ -139,7 +138,7 @@ function excluirUsuario() {
   global $conn;
   $id = intval($_POST['id']);
   $conn->query("DELETE FROM usuario WHERE id=$id");
-  header("Location: usuario.php?msg=ok");
+  header("Location: usuarios/usuario_consulta.php?msg=ok");
   exit;
 }
 
