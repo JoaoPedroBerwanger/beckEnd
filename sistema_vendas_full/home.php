@@ -25,37 +25,39 @@ $nome = $_SESSION['usuario_nome'];
         <div>Bem vindo, <?php echo htmlspecialchars($nome); ?></div>
         <form method="POST" action="funcoes.php" style="margin: 0;">
           <input type="hidden" name="acao" value="logout" />
-          <button type="button">Sair</button>
+          <button type="submit" class="button">Sair</button>
         </form>
       </div>
 
       <h3>Cadastros</h3>
       <div class="grid">
-        <a href="usuarios/usuario_consulta.php" class="tile">Usuários</a>
+        <a href="usuario/usuario_consulta.php" class="tile">Usuários</a>
         <a href="cliente/cliente_consulta.php" class="tile">Clientes</a>
-        <a href="produtos/produto_consulta.php" class="tile">Produtos</a>
-        <a href="produtos/marca_consulta.php" class="tile">Marcas</a>
-        <a href="produtos/prod_grupo_consultas.php" class="tile">Grupos de Produto</a>
-        <a href="vendas/condicao_pagamento.php" class="tile">Condições de Pagamento</a>
+        <a href="cliente/clienteGrupo_consulta.php" class="tile">Grupo de Clientes</a>
+        <a href="produto/produto_consulta.php" class="tile">Produtos</a>
+        <a href="produto/marca_consulta.php" class="tile">Marcas</a>
+        <a href="produto/produtoGrupo_consulta.php" class="tile">Grupos de Produto</a>
+        <a href="vendas/condicaoPagamento_consulta.php" class="tile">Condição de Pagamento</a>
+        <a href="vendas/formaPagamento_consulta.php" class="tile">Forma de Pagamento</a>
       </div>
 
       <h3>Vendas</h3>
       <div class="grid">
-        <a href="vendas/vender.php" class="tile">Realizar Venda</a>
-        <a href="vendas/vendas.php" class="tile">Listar Vendas</a>
+        <a href="vendas/venda_form.php" class="tile">Realizar Venda</a>
+        <a href="vendas/venda_consulta.php" class="tile">Consultar Vendas</a>
       </div>
 
       <h3>Relatórios</h3>
       <div class="grid">
-        <a href="relatorios/relatorio_vendas_periodo.php" class="tile">Vendas por Período</a>
-        <a href="relatorios/relatorio_vendas_cliente.php" class="tile">Vendas por Cliente</a>
-        <a href="relatorios/relatorio_produtos_mais_vendidos.php" class="tile">Produtos mais Vendidos</a>
-        <a href="relatorios/relatorio_vendas_usuario.php" class="tile">Vendas por Usuário</a>
-        <a href="relatorios/relatorio_clientes_grupo.php" class="tile">Clientes por Grupo</a>
+        <a href="relatorios/relatorioVendasPeriodo.php" class="tile">Vendas por Período</a>
+        <a href="relatorios/relatorioVendasCliente.php" class="tile">Vendas por Cliente</a>
+        <a href="relatorios/relatorioProdutosMaisVendidos.php" class="tile">Produtos mais Vendidos</a>
+        <a href="relatorios/relatorioVendasUsuario.php" class="tile">Vendas por Usuário</a>
+        <a href="relatorios/relatorioClientesGrupo.php" class="tile">Clientes por Grupo</a>
       </div>
 
-       <div style="margin-top: 24px;">
-        <a href="index.html" class="button" style="width: 200px;">⟵ Voltar ao Login</a>
+      <div style="margin-top: 24px;">
+        <a href="index.html" class="button" style="width: 200px;">Voltar ao Login</a>
       </div>
     </div>
   </body>

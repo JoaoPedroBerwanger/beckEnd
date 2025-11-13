@@ -23,11 +23,11 @@ $res = $conn->query("SELECT id, nome, login, idnAtivo FROM usuario ORDER BY id")
   <div class="wrap">
     <div class="header">
       <div>Usuários</div>
-      <div><a class="button" href="../home.php">⟵ Voltar</a></div>
+      <div><a class="button" href="../home.php">Voltar</a></div>
     </div>
 
     <div class="form-card">
-      <a class="button" href="usuario_form.php">+ Novo</a>
+      <a class="button" href="usuario_form.php">Novo</a>
           <div id="erro" class="error" style="display: none"></div>
           <div id="ok" class="notice" style="display: none"></div>
     </div>

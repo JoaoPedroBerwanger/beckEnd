@@ -15,7 +15,7 @@ require_once '../funcoes.php';
   <div class="wrap">
     <div class="header">
       <div>Relatório: Produtos mais Vendidos</div>
-      <div><a class="button" href="../home.php">⟵ Voltar</a></div>
+      <div><a class="button" href="../home.php">Voltar</a></div>
     </div>
     <?php
     $sql = "SELECT p.id, p.descricao, SUM(vp.quantidade) AS qtd
@@ -34,7 +34,7 @@ require_once '../funcoes.php';
     }
     echo "</tbody></table>";
     ?>
-    <p><a class="button" href="../home.php">⟵ Voltar ao Menu</a></p>
+    <p><a class="button" href="../home.php">Voltar ao Menu</a></p>
   </div>
 </body>
 

@@ -49,8 +49,8 @@ if ($id > 0) {
 
       <div class="actions">
         <input type="hidden" name="acao" value="<?= $modo === 'editar' ? 'editarUsuario' : 'addUsuario' ?>">
-        <button type="button">Salvar</button>
-        <a class="button" href="usuario_consulta.php">Cancelar</a>
+        <button type="submit" name="salvar">Salvar</button>
+        <a class="button" href="usuario/usuario_consulta.php">Cancelar</a>
       </div>
     </form>
   </div>

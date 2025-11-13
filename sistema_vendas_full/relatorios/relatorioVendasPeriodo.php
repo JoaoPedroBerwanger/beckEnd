@@ -15,7 +15,7 @@ require_once '../funcoes.php';
   <div class="wrap">
     <div class="header">
       <div>Relatório: Vendas por Período</div>
-      <div><a class="button" href="../home.php">⟵ Voltar</a></div>
+      <div><a class="button" href="../home.php">Voltar</a></div>
     </div>
     <form method="GET" class="filters">
       <div><label>De:</label><input type="date" name="de" required></div>
@@ -45,7 +45,7 @@ require_once '../funcoes.php';
       echo "<div class='notice'>Selecione o período e clique em Filtrar.</div>";
     }
     ?>
-    <p><a class="button" href="../home.php">⟵ Voltar ao Menu</a></p>
+    <p><a class="button" href="../home.php">Voltar ao Menu</a></p>
   </div>
 </body>
 

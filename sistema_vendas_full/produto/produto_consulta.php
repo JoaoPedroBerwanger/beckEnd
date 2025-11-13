@@ -15,6 +15,7 @@ if (isset($_GET['excluir'])) {
   }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -26,11 +27,11 @@ if (isset($_GET['excluir'])) {
   <div class="wrap">
     <div class="header">
       <div>Produtos</div>
-      <div><a class="button" href="../home.php">⟵ Voltar</a></div>
+      <div><a class="button" href="../home.php">Voltar</a></div>
     </div>
 
     <div class="form-card">
-      <a class="button" href="produto_form.php">+ Novo Produto</a>
+      <a class="button" href="produto_form.php">Novo Produto</a>
     </div>
 
     <?php

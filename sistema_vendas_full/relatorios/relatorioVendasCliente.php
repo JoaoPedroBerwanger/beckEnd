@@ -15,7 +15,7 @@ require_once '../funcoes.php';
   <div class="wrap">
     <div class="header">
       <div>Relatório: Vendas por Cliente</div>
-      <div><a class="button" href="../home.php">⟵ Voltar</a></div>
+      <div><a class="button" href="../home.php">Voltar</a></div>
     </div>
     <form method="GET" class="filters">
       <div><label>ID do Cliente:</label><input type="number" name="cliente_id" required></div>
@@ -41,7 +41,7 @@ require_once '../funcoes.php';
       echo "<div class='notice'>Informe o ID do cliente e clique em Filtrar.</div>";
     }
     ?>
-    <p><a class="button" href="../home.php">⟵ Voltar ao Menu</a></p>
+    <p><a class="button" href="../home.php">Voltar ao Menu</a></p>
   </div>
 </body>
 

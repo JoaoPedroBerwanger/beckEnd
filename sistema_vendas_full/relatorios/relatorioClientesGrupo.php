@@ -15,7 +15,7 @@ require_once '../funcoes.php';
   <div class="wrap">
     <div class="header">
       <div>Relatório: Clientes por Grupo</div>
-      <div><a class="button" href="../home.php">⟵ Voltar</a></div>
+      <div><a class="button" href="../home.php">Voltar</a></div>
     </div>
     <?php
     $sql = "SELECT g.id, g.descricao AS grupo, COUNT(c.id) AS qtd
@@ -34,7 +34,7 @@ require_once '../funcoes.php';
     }
     echo "</tbody></table>";
     ?>
-    <p><a class="button" href="../home.php">⟵ Voltar ao Menu</a></p>
+    <p><a class="button" href="../home.php">Voltar ao Menu</a></p>
   </div>
 </body>
 

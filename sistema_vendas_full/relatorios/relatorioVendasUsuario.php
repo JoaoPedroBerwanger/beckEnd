@@ -15,7 +15,7 @@ require_once '../funcoes.php';
   <div class="wrap">
     <div class="header">
       <div>Relatório: Vendas por Usuário</div>
-      <div><a class="button" href="../home.php">⟵ Voltar</a></div>
+      <div><a class="button" href="../home.php">Voltar</a></div>
     </div>
     <?php
     $sql = "SELECT u.id, u.nome, COUNT(v.id) AS qtd_vendas, COALESCE(SUM(v.totalVenda),0) AS total
@@ -35,7 +35,7 @@ require_once '../funcoes.php';
     }
     echo "</tbody></table>";
     ?>
-    <p><a class="button" href="../home.php">⟵ Voltar ao Menu</a></p>
+    <p><a class="button" href="../home.php">Voltar ao Menu</a></p>
   </div>
 </body>
 
