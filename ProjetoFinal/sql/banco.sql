@@ -94,14 +94,3 @@ CREATE TABLE venda_produtos (
     FOREIGN KEY (idVenda) REFERENCES vendas(id),
     FOREIGN KEY (idProduto) REFERENCES produto(id)
 );
-
-CREATE TABLE parcela (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    venda_id INT NOT NULL,
-    numero_parcela INT NOT NULL,
-    valor DECIMAL(18,2) NOT NULL,
-    vencimento DATE NOT NULL,
-    pago TINYINT(1) DEFAULT 0,
-    data_pagamento DATE NULL,
-    FOREIGN KEY (venda_id) REFERENCES vendas(id)
-);

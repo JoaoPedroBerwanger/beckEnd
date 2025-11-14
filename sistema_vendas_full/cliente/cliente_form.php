@@ -5,6 +5,7 @@ require_once '../funcoes.php';
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
+
 if (!isset($_SESSION['usuario_id'])) {
   header("Location: ../index.html");
   exit;
@@ -18,6 +19,10 @@ $cliente = [
   'id' => 0,
   'nome' => '',
   'cpfCnpj' => '',
+  'rua' => '',
+  'numero' => '',
+  'bairro' => '',
+  'cep' => '',
   'email' => '',
   'idGrupoCliente' => '',
   'idnAtivo' => 1
@@ -29,6 +34,8 @@ if ($modo === 'editar' && $id > 0) {
     $cliente = $query->fetch_assoc();
   }
 }
+
+$grupos  = $conn->query("SELECT id, descricao FROM cliente_grupo WHERE idnAtivo = 1 ORDER BY descricao");
 ?>
 
 <!DOCTYPE html>
@@ -59,19 +66,37 @@ if ($modo === 'editar' && $id > 0) {
 
         <label>Nome</label>
         <input type="text" name="nome" required
-               value="<?= htmlspecialchars($cliente['nome']) ?>">
+                value="<?= htmlspecialchars($cliente['nome']) ?>">
 
         <label>CPF/CNPJ</label>
         <input type="text" name="cpfCnpj" required
                value="<?= htmlspecialchars($cliente['cpfCnpj']) ?>">
 
+        <label>Endereço</label>
+        <input type="text" name="rua" required
+               value="<?= htmlspecialchars($cliente['rua']) ?>">
+
+        <label>Número</label>
+        <input type="integer" name="numero" required
+               value="<?= ($cliente['numero']) ?>">
+
+        <label>Bairro</label>
+        <input type="text" name="bairro" required
+               value="<?= htmlspecialchars($cliente['bairro']) ?>">
+
         <label>Email</label>
         <input type="email" name="email" required
                value="<?= htmlspecialchars($cliente['email']) ?>">
 
-        <label>Grupo (ID)</label>
-        <input type="number" name="idGrupoCliente"
-               value="<?= htmlspecialchars($cliente['idGrupoCliente']) ?>">
+        <label>Grupo</label>
+        <select name="idGrupoCliente">
+          <option value="">Selecione</option>
+          <?php if ($grupos): while($f = $grupos->fetch_assoc()): ?>
+            <option value="<?= $f['id']; ?>" <?= (($_POST['idGrupoCliente'] ?? '') == $f['id']) ? 'selected' : ''; ?>>
+              <?= htmlspecialchars($f['descricao']); ?>
+            </option>
+          <?php endwhile; endif; ?>
+        </select>
 
         <?php if ($modo === 'editar'): ?>
           <label>Ativo</label>

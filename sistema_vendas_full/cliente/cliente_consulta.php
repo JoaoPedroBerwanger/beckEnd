@@ -13,7 +13,7 @@ if (!isset($_SESSION['usuario_id'])) {
 $modo = $_GET['modo'] ?? 'lista';
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-$select = $conn->query("SELECT id, nome, cpfCnpj, email, idGrupoCliente, idnAtivo FROM cliente ORDER BY id");
+$select = $conn->query("SELECT id, nome, cpfCnpj, email, rua, numero, bairro, cep, idGrupoCliente, idnAtivo FROM cliente ORDER BY id");
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +42,10 @@ $select = $conn->query("SELECT id, nome, cpfCnpj, email, idGrupoCliente, idnAtiv
           <th>ID</th>
           <th>Nome</th>
           <th>CPF/CNPJ</th>
+          <th>Endereço</th>
+          <th>Número</th>
+          <th>Bairro</th>
+          <th>CEP</th>
           <th>Email</th>
           <th>Grupo</th>
           <th>Ativo</th>
@@ -55,6 +59,11 @@ $select = $conn->query("SELECT id, nome, cpfCnpj, email, idGrupoCliente, idnAtiv
             <tr>
               <td><?= $r['id'] ?></td>
               <td><?= htmlspecialchars($r['nome']) ?></td>
+              <td><?= htmlspecialchars($r['cpfCnpj']) ?></td>
+              <td><?= htmlspecialchars($r['rua']) ?></td>
+              <td><?= htmlspecialchars($r['numero']) ?></td>
+              <td><?= htmlspecialchars($r['bairro']) ?></td>
+              <td><?= htmlspecialchars($r['cep']) ?></td>
               <td><?= htmlspecialchars($r['cpfCnpj']) ?></td>
               <td><?= htmlspecialchars($r['email']) ?></td>
               <td><?= htmlspecialchars($r['idGrupoCliente']) ?></td>
