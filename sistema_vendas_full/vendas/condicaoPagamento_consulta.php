@@ -17,7 +17,7 @@ $regs = $conn->query("SELECT * FROM condicao_pagamento ORDER BY descricao");
 <head>
   <meta charset="UTF-8">
   <title>Condições de Pagamento</title>
-  <link rel="stylesheet" href="assets/css/estilo.css">
+  <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 
 <body class="bg">

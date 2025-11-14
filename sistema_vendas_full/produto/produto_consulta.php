@@ -14,6 +14,8 @@ if (isset($_GET['excluir'])) {
     echo "<div class='notice'>Registro excluído.</div>";
   }
 }
+
+$produtos = listarProdutos();
 ?>
 
 <!DOCTYPE html>
@@ -24,19 +26,14 @@ if (isset($_GET['excluir'])) {
   <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 <body>
+
   <div class="wrap">
     <div class="header">
       <div>Produtos</div>
       <div><a class="button" href="../home.php">Voltar</a></div>
     </div>
 
-    <div class="form-card">
-      <a class="button" href="produto_form.php">Novo Produto</a>
-    </div>
-
-    <?php
-    $produtos = listarProdutos();
-    ?>
+    <a class="button" href="produto_form.php">Novo Produto</a>
 
     <table class="table">
       <thead>
@@ -53,18 +50,18 @@ if (isset($_GET['excluir'])) {
       </thead>
       <tbody>
         <?php if (!empty($produtos)): ?>
-          <?php foreach ($produtos as $p): ?>
+          <?php foreach ($produtos as $prod): ?>
             <tr>
-              <td><?= $p['id'] ?></td>
-              <td><?= htmlspecialchars($p['descricao']) ?></td>
-              <td><?= htmlspecialchars($p['marca'] ?? '-') ?></td>
-              <td><?= htmlspecialchars($p['grupo'] ?? '-') ?></td>
-              <td><?= number_format($p['precoVenda'], 2, ',', '.') ?></td>
-              <td><?= number_format($p['precoCusto'], 2, ',', '.') ?></td>
-              <td><?= $p['idnAtivo'] ? 'Sim' : 'Não' ?></td>
+              <td><?= $prod['id'] ?></td>
+              <td><?= htmlspecialchars($prod['descricao']) ?></td>
+              <td><?= htmlspecialchars($prod['marca'] ?? '-') ?></td>
+              <td><?= htmlspecialchars($prod['grupo'] ?? '-') ?></td>
+              <td><?= number_format($prod['precoVenda'], 2, ',', '.') ?></td>
+              <td><?= number_format($prod['precoCusto'], 2, ',', '.') ?></td>
+              <td><?= $prod['idnAtivo'] ? 'Sim' : 'Não' ?></td>
               <td>
-                <a href="produto_form.php?id=<?= $p['id'] ?>">Editar</a> |
-                <a href="?excluir=<?= $p['id'] ?>" onclick="return confirm('Excluir registro?')">Excluir</a>
+                <a class="button" href="produto_form.php?id=<?= $prod['id'] ?>">Editar</a>
+                <a class="button" href="?excluir=<?= $p['id'] ?>" onclick="return confirm('Excluir registro?')">Excluir</a>
               </td>
             </tr>
           <?php endforeach; ?>
@@ -74,5 +71,6 @@ if (isset($_GET['excluir'])) {
       </tbody>
     </table>
   </div>
+  
 </body>
 </html>

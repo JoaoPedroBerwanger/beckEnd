@@ -23,13 +23,16 @@ $select = $conn->query("SELECT id, descricao, idnAtivo FROM marca ORDER BY descr
 <body>
 <div class="wrap">
 
+<div class="wrap">
     <div class="header">
       <div>Cadastro de Marcas</div>
-      <a class="button" href="../home.php">Voltar</a>
+      <div><a class="button" href="../home.php">Voltar</a></div>
     </div>
 
+
+
     <div class="form-card">
-        <a href="marca_form.php?modo=novo" class="button">+ Nova Marca</a>
+        <a href="marca_form.php?modo=novo" class="button">Nova Marca</a>
     </div>
 
     <table class="table">
@@ -51,7 +54,7 @@ $select = $conn->query("SELECT id, descricao, idnAtivo FROM marca ORDER BY descr
                     <td><?= $r['idnAtivo'] ? 'Sim' : 'Não' ?></td>
 
                     <td>
-                        <a href="marca_form.php?modo=editar&id=<?= $r['id'] ?>">Editar</a>
+                        <a class="button" href="marca_form.php?modo=editar&id=<?= $r['id'] ?>">Editar</a>
 
                         <form action="../funcoes.php" method="POST" style="display:inline;">
                             <input type="hidden" name="acao" value="delMarca">
@@ -67,6 +70,7 @@ $select = $conn->query("SELECT id, descricao, idnAtivo FROM marca ORDER BY descr
         </tbody>
     </table>
 
+</div>
 </div>
 </body>
 </html>

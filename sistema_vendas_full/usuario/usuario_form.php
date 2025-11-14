@@ -16,7 +16,7 @@ if ($id > 0) {
 <head>
   <meta charset="UTF-8">
   <title><?= $modo === 'editar' ? 'Editar Usuário' : 'Novo Usuário' ?></title>
-  <link rel="stylesheet" href="../assets/css/estilo.css">
+  <link rel="stylesheet" href="../../assets/css/estilo.css">
   <script src="../assets/js/alertas.js"></script>
 </head>
 

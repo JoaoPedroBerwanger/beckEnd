@@ -27,15 +27,14 @@ $res = $conn->query("
 <head>
   <meta charset="UTF-8">
   <title>Vendas</title>
-  <link rel="stylesheet" href="assets/css/estilo.css">
+  <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 
 <body class="bg">
   <div class="wrap">
-
     <div class="header">
       <div>Vendas</div>
-      <a class="button" href="home.php">Voltar</a>
+      <a class="button" href="../home.php">Voltar</a>
     </div>
 
     <div class="form-card">

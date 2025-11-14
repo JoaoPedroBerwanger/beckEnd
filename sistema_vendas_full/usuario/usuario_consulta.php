@@ -1,5 +1,4 @@
 <?php
-
 require_once '../funcoes.php';
 
 if (!isset($_SESSION['usuario_id'])) {
@@ -18,8 +17,8 @@ $res = $conn->query("SELECT id, nome, login, idnAtivo FROM usuario ORDER BY id")
   <link rel="stylesheet" href="../assets/css/estilo.css">
   <script src="../assets/js/alertas.js"></script>
 </head>
-
 <body>
+
   <div class="wrap">
     <div class="header">
       <div>Usuários</div>
@@ -47,11 +46,11 @@ $res = $conn->query("SELECT id, nome, login, idnAtivo FROM usuario ORDER BY id")
               <td><?= htmlspecialchars($r['login']) ?></td>
               <td><?= $r['idnAtivo'] ? 'Sim' : 'Não' ?></td>
               <td>
-                <a class="button" href="usuario_form.php?id=<?= $r['id'] ?>">Editar</a> |
+                <a class="button" href="usuario_form.php?id=<?= $r['id'] ?>">Editar</a>
                 <form method="POST" action="../funcoes.php" style="display:inline;">
                   <input type="hidden" name="acao" value="delUsuario">
                   <input type="hidden" name="id" value="<?= $r['id'] ?>">
-                  <button type="button" onclick="return confirm('Excluir este usuário?')" class="link-btn">Excluir</button>
+                  <button type="submit" onclick="return confirm('Excluir este usuário?')" class="link-btn">Excluir</button>
                 </form>
               </td>
             </tr>
@@ -62,5 +61,6 @@ $res = $conn->query("SELECT id, nome, login, idnAtivo FROM usuario ORDER BY id")
       </tbody>
     </table>
   </div>
+
 </body>
 </html>

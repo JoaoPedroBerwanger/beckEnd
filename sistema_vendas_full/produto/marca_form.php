@@ -28,7 +28,7 @@ if ($modo === 'editar' && $id > 0) {
 <head>
     <meta charset="UTF-8">
     <title>Marcas</title>
-    <link rel="stylesheet" href="../assets/css/estilo.css">
+    <link rel="stylesheet" href="../../assets/css/estilo.css">
 </head>
 <body>
 <div class="wrap">

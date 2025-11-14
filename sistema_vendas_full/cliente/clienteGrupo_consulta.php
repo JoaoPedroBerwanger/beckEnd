@@ -14,7 +14,7 @@ $select = $conn->query("SELECT id, descricao, idnAtivo FROM cliente_grupo ORDER 
 <head>
   <meta charset="UTF-8">
   <title>Grupos de Parceiros</title>
-  <link rel="stylesheet" href="assets/css/estilo.css">
+  <link rel="stylesheet" href="../assets/css/estilo.css">
   <script src="assets/js/alertas.js"></script>
 </head>
 
@@ -23,7 +23,7 @@ $select = $conn->query("SELECT id, descricao, idnAtivo FROM cliente_grupo ORDER 
 
   <div class="header">
     <div>Grupos de Parceiros</div>
-    <div><a class="button" href="home.php">Voltar</a></div>
+    <div><a class="button" href="../home.php">Voltar</a></div>
   </div>
 
   <div class="form-card">

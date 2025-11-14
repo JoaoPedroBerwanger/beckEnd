@@ -34,7 +34,7 @@ if ($modo === 'editar' && $id > 0) {
 <head>
   <meta charset="UTF-8">
   <title><?= $modo === "editar" ? "Editar Produto" : "Novo Produto" ?></title>
-  <link rel="stylesheet" href="../assets/css/estilo.css">
+  <link rel="stylesheet" href="../../assets/css/estilo.css">
 </head>
 
 <body class="bg">

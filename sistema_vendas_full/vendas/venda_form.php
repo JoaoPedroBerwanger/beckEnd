@@ -82,7 +82,7 @@ if ($totalComDesconto < 0) $totalComDesconto = 0;
 <head>
   <meta charset="UTF-8">
   <title>Nova Venda</title>
-  <link rel="stylesheet" href="assets/css/estilo.css">
+  <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 
 <body class="bg">
@@ -90,7 +90,7 @@ if ($totalComDesconto < 0) $totalComDesconto = 0;
 
     <div class="header">
       <div>Nova Venda</div>
-      <a class="button" href="home.php">Voltar</a>
+      <a class="button" href="../home.php">Voltar</a>
     </div>
 
     <div class="form-card">

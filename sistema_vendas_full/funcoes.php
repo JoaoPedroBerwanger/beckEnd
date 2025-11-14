@@ -267,7 +267,7 @@ function addCliente() {
   $nome = trim($_POST['nome']);
   $cpfCnpj = trim($_POST['cpfCnpj']);
   $email = trim($_POST['email']);
-  $idGrupoCliente = intval($_POST['idGrupoCliente']);
+  $idGrupoCliente = isset($_POST['idGrupoCliente']) && intval($_POST['idGrupoCliente']) > 0 ? intval($_POST['idGrupoCliente']) : null;
 
   $query = "INSERT INTO cliente (nome, cpfCnpj, email, idGrupoCliente, idnAtivo)
           VALUES ('$nome', '$cpfCnpj', '$email', $idGrupoCliente, 1)";
@@ -278,6 +278,7 @@ function addCliente() {
     header("Location: cliente_form.php?erro=db");
   }
   
+  $conn->close();
   exit;
 }
 
@@ -416,8 +417,8 @@ function salvarProduto($prod) {
   $idGrupo = $prod['idGrupoProduto'] ? intval($prod['idGrupoProduto']) : 'NULL';
   $idnAtivo = intval($prod['idnAtivo']);
 
-  if (!empty($d['id']) && $d['id'] > 0) {
-    $id = intval($d['id']);
+  if (!empty($prod['id']) && $prod['id'] > 0) {
+    $id = intval($prod['id']);
     $query = "UPDATE produto
       SET descricao = '$descricao',
           precoVenda = $precoVenda,
@@ -702,13 +703,13 @@ function addProduto() {
 function editProduto() {
   global $conn;
 
-  $id             = intval($_POST['id'] ?? 0);
-  $descricao      = trim($_POST['descricao'] ?? '');
-  $precoVenda     = floatval($_POST['precoVenda'] ?? 0);
-  $precoCusto     = floatval($_POST['precoCusto'] ?? 0);
-  $idMarca        = !empty($_POST['idMarcaProduto']) ? intval($_POST['idMarcaProduto']) : 'NULL';
-  $idGrupo        = !empty($_POST['idGrupoProduto']) ? intval($_POST['idGrupoProduto']) : 'NULL';
-  $idnAtivo       = intval($_POST['idnAtivo'] ?? 0);
+  $id = intval($_POST['id'] ?? 0);
+  $descricao = trim($_POST['descricao'] ?? '');
+  $precoVenda = floatval($_POST['precoVenda'] ?? 0);
+  $precoCusto = floatval($_POST['precoCusto'] ?? 0);
+  $idMarca = !empty($_POST['idMarcaProduto']) ? intval($_POST['idMarcaProduto']) : 'NULL';
+  $idGrupo = !empty($_POST['idGrupoProduto']) ? intval($_POST['idGrupoProduto']) : 'NULL';
+  $idnAtivo = intval($_POST['idnAtivo'] ?? 0);
 
   if ($id <= 0) {
     header("Location: produto/produto_consulta.php?erro=id");
@@ -745,13 +746,11 @@ function delProduto() {
     exit;
   }
 
-  // tenta excluir fisicamente
   if ($conn->query("DELETE FROM produto WHERE id=$id")) {
     header("Location: produto/produto_consulta.php?msg=ok");
     exit;
   }
 
-  // fallback: desativa caso exista FK
   $conn->query("UPDATE produto SET idnAtivo = 0 WHERE id=$id");
 
   header("Location: produto/produto_consulta.php?msg=desativado");

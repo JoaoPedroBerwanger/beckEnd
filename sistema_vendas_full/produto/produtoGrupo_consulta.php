@@ -18,7 +18,7 @@ $grupos = $conn->query("SELECT * FROM produto_grupo ORDER BY descricao");
 <head>
   <meta charset="UTF-8">
   <title>Grupos de Produto</title>
-  <link rel="stylesheet" href="assets/css/estilo.css">
+  <link rel="stylesheet" href="../assets/css/estilo.css">
   <script src="assets/js/alertas.js"></script>
 </head>
 
@@ -55,8 +55,7 @@ $grupos = $conn->query("SELECT * FROM produto_grupo ORDER BY descricao");
               <td><?= $g['idnAtivo'] ?></td>
               <td>
                 <a href="produtoGrupo_form.php?modo=editar&id=<?= $g['id'] ?>">Editar</a>
-                |
-                <form method="POST" action="funcoes.php" style="display:inline">
+                <form method="POST" action="../funcoes.php" style="display:inline">
                   <input type="hidden" name="acao" value="delGrupoProduto">
                   <input type="hidden" name="id" value="<?= $g['id'] ?>">
                   <button type="submit" onclick="return confirm('Excluir permanentemente?')">Excluir</button>

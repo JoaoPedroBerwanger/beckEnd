@@ -21,16 +21,15 @@ $select = $conn->query("SELECT id, nome, cpfCnpj, email, idGrupoCliente, idnAtiv
 <head>
   <meta charset="UTF-8">
   <title>Clientes</title>
-  <link rel="stylesheet" href="assets/css/estilo.css">
-  <script src="assets/js/alertas.js"></script>
+  <link rel="stylesheet" href="../assets/css/estilo.css">
+  <script src="../assets/js/alertas.js"></script>
 </head>
 
 <body>
   <div class="wrap">
-
     <div class="header">
       <div>Clientes</div>
-      <div><a class="button" href="home.php">Voltar</a></div>
+      <div><a class="button" href="../home.php">Voltar</a></div>
     </div>
 
     <div class="form-card">

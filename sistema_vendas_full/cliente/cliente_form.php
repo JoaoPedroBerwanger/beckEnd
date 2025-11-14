@@ -1,7 +1,10 @@
 <?php
-require_once '../funcoes.php';
-session_start();
 
+require_once '../funcoes.php';
+
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 if (!isset($_SESSION['usuario_id'])) {
   header("Location: ../index.html");
   exit;
@@ -33,8 +36,8 @@ if ($modo === 'editar' && $id > 0) {
 <head>
   <meta charset="UTF-8">
   <title><?= $modo === 'editar' ? 'Editar Cliente' : 'Novo Cliente' ?></title>
-  <link rel="stylesheet" href="assets/css/estilo.css">
-  <script src="assets/js/alertas.js"></script>
+  <link rel="stylesheet" href="../assets/css/estilo.css">
+  <script src="../assets/js/alertas.js"></script>
 </head>
 
 <body class="bg">
@@ -47,7 +50,7 @@ if ($modo === 'editar' && $id > 0) {
 
     <div class="form-card">
 
-      <form method="POST" action="funcoes.php">
+      <form method="POST" action="../funcoes.php">
 
         <input type="hidden" name="acao" 
                value="<?= $modo === 'editar' ? 'editarCliente' : 'addCliente' ?>">
@@ -67,7 +70,7 @@ if ($modo === 'editar' && $id > 0) {
                value="<?= htmlspecialchars($cliente['email']) ?>">
 
         <label>Grupo (ID)</label>
-        <input type="number" name="idGrupoCliente" required
+        <input type="number" name="idGrupoCliente"
                value="<?= htmlspecialchars($cliente['idGrupoCliente']) ?>">
 
         <?php if ($modo === 'editar'): ?>

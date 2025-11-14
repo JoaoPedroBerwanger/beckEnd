@@ -18,6 +18,7 @@ require_once '../funcoes.php';
       <div><a class="button" href="../home.php">Voltar</a></div>
     </div>
     <form method="GET" class="filters">
+      <h2>Selecione o período e clique em Filtrar.</h2>
       <div><label>De:</label><input type="date" name="de" required></div>
       <div><label>Até:</label><input type="date" name="ate" required></div>
       <div><button type="button">Filtrar</button></div>
@@ -42,7 +43,7 @@ require_once '../funcoes.php';
       }
       echo "</tbody></table><div class='notice'><strong>Total do período:</strong> R$ " . number_format($soma, 2, ',', '.') . "</div>";
     } else {
-      echo "<div class='notice'>Selecione o período e clique em Filtrar.</div>";
+      echo "<div class='notice'></div>";
     }
     ?>
     <p><a class="button" href="../home.php">Voltar ao Menu</a></p>
