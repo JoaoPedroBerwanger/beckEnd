@@ -10,7 +10,11 @@ if (!isset($_SESSION['usuario_id'])) {
 
 require_once '../funcoes.php';
 
-$produtos = listarProdutos();
+$produtos =  $conn->query("SELECT p.id, p.descricao, m.descricao AS marca, g.descricao AS grupo, p.precoVenda, p.precoCusto, p.idnAtivo
+    FROM produto p
+    LEFT JOIN marca m ON p.idMarcaProduto = m.id
+    LEFT JOIN produto_grupo g ON p.idGrupoProduto = g.id
+    ORDER BY p.id");
 ?>
 
 <!DOCTYPE html>

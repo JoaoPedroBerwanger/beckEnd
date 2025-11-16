@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["acao"])) {
     case 'delProduto': delProduto(); break;
 
     case "addMarca": addMarca(); break;
-    case "editarMarca": editarMarca(); break;
+    case "editarMarca": editMarca(); break;
     case "delMarca": delMarca(); break;
 
     case 'addCondicaoPagamento': addCondicaoPagamento(); break;
@@ -140,7 +140,6 @@ function cancelarVenda() {
     exit;
   }
 
-  // marca como cancelada
   $query = "UPDATE vendas SET idnCancelada = 1 WHERE id = $id";
 
   if ($conn->query($query)) {
@@ -422,75 +421,6 @@ function delGrupoCliente() {
   exit;
 }
 
-function listarProdutos() {
-  global $conn;
-
-  $query = "
-    SELECT p.id, p.descricao, m.descricao AS marca, g.descricao AS grupo, p.precoVenda, p.precoCusto, p.idnAtivo
-    FROM produto p
-    LEFT JOIN marca m ON p.idMarcaProduto = m.id
-    LEFT JOIN produto_grupo g ON p.idGrupoProduto = g.id
-    ORDER BY p.id";
-
-  $consulta = $conn->query($query);
-
-  return $consulta ? $consulta->fetch_all(MYSQLI_ASSOC) : [];
-}
-
-function obterProduto($id) {
-  global $conn;
-
-  $id = intval($id);
-
-  $query = "SELECT * FROM produto WHERE id = $id";
-
-  $consulta = $conn->query($query);
-
-  return $consulta && $consulta->num_rows ? $consulta->fetch_assoc() : null;
-}
-
-function salvarProduto($prod) {
-  global $conn;
-
-  $descricao = $conn->real_escape_string($prod['descricao']);
-  $precoVenda = floatval($prod['precoVenda']);
-  $precoCusto = floatval($prod['precoCusto']);
-  $idMarca = $prod['idMarcaProduto'] ? intval($prod['idMarcaProduto']) : 'NULL';
-  $idGrupo = $prod['idGrupoProduto'] ? intval($prod['idGrupoProduto']) : 'NULL';
-  $idnAtivo = intval($prod['idnAtivo']);
-
-  if (!empty($prod['id']) && $prod['id'] > 0) {
-    $id = intval($prod['id']);
-    $query = "UPDATE produto
-      SET descricao = '$descricao',
-          precoVenda = $precoVenda,
-          precoCusto = $precoCusto,
-          idMarcaProduto = $idMarca,
-          idGrupoProduto = $idGrupo,
-          idnAtivo = $idnAtivo
-      WHERE id = $id";
-  } else {
-    $query = "
-      INSERT INTO produto (descricao, precoVenda, precoCusto, idMarcaProduto, idGrupoProduto, idnAtivo)
-      VALUES ('$descricao', $precoVenda, $precoCusto, $idMarca, $idGrupo, 1)";
-  }
-
-  return $conn->query($query);
-}
-
-function excluirProduto($id) {
-  global $conn;
-
-  $id = intval($id);
-  
-  if ($conn->query("DELETE FROM produto WHERE id = $id")) {
-    return true;
-  }
-
-  $conn->query("UPDATE produto SET idnAtivo = 0 WHERE id = $id");
-  return false;
-}
-
 function listarMarcas() {
   global $conn;
 
@@ -525,7 +455,7 @@ function addMarca() {
   exit;
 }
 
-function editarMarca() {
+function editMarca() {
   global $conn;
 
   $id = intval($_POST['id']);
