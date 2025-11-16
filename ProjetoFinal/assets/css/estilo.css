@@ -1,0 +1,213 @@
+/* Layout Padrão */
+* {
+  box-sizing: border-box;
+  font-family: system-ui, Segoe UI, Roboto, Arial;
+  transition: all 0.15s ease;
+}
+
+/* Links gerais */
+a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Fundo da tela de cadastro*/
+body.bg {
+  background-color: #f4f6fb;
+  min-height: 100vh;
+  padding-top: 40px;
+}
+
+/* Fundo da tela de login */
+body.bg-login {
+  background-color: #f4f6fb;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card centralizado */
+.card {
+  width: 360px;
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+  margin: 0 0 12px;
+}
+
+/* Campos de formulário */
+label {
+  display: block;
+  margin-top: 10px;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border: 1px solid #d9dce3;
+  border-radius: 10px;
+}
+
+/* Botões */
+button,
+a.button {
+  flex: 1;
+  height: 44px;
+  margin: 5px;
+  border: none;
+  border-radius: 12px;
+  background: #3b82f6;
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
+  font-family: inherit;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.header .button {
+  margin: 0px !important;
+  width: auto !important;
+  flex: 0 0 auto !important;
+}
+
+button:hover,
+a.button:hover {
+  background: #2563eb;
+}
+
+button:active,
+a.button:active {
+  transform: scale(0.98);
+}
+
+/* Ações do Login */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* Mensagens */
+.error,
+.notice {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 320px;
+  max-width: 500px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 15px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+}
+
+.error {
+  background-color: #ffe6e6;
+  border: 1px solid #ff4d4d;
+  color: #a60000;
+}
+
+.notice {
+  background-color: #e6f9f0;
+  border: 1px solid #00c853;
+  color: #007e33;
+}
+
+/* Layout das demais telas, com limitador de tamanho lateral e centralizado */
+.wrap {
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+/* Cabeçalho com nome da página e o botão sair */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111827;
+  color: #fff;
+  padding: 22px 25px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+/* Grid das opções de cadastro e relatório, com as opções no estilo cartãe um efeito de hover */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 4px;
+}
+
+.tile {
+  display: block;
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px;
+  text-decoration: none;
+  color: #111;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.tile:hover {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Tabelas dos relatórios */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.table th {
+  background: #f3f4f6;
+}
