@@ -21,20 +21,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // adicionar produto
   if (isset($_POST['add_produto'])) {
-    $idProduto   = intval($_POST['idProduto'] ?? 0);
-    $quantidade  = floatval($_POST['quantidade'] ?? 0);
-    $precoVenda  = floatval($_POST['precoVenda'] ?? 0);
-    $desconto    = floatval($_POST['desconto'] ?? 0);
+    $idProduto = intval($_POST['idProduto'] ?? 0);
+    $quantidade = floatval($_POST['quantidade'] ?? 0);
+    $precoVenda = floatval($_POST['precoVenda'] ?? 0);
+    $desconto = floatval($_POST['desconto'] ?? 0);
 
     if ($idProduto > 0 && $quantidade > 0 && $precoVenda > 0) {
 
       // busca produto
       $qProd = $conn->query("SELECT descricao, precoCusto FROM produto WHERE id = $idProduto");
-      $prod  = $qProd && $qProd->num_rows ? $qProd->fetch_assoc() : null;
+      $prod = $qProd && $qProd->num_rows ? $qProd->fetch_assoc() : null;
 
       if ($prod) {
         $precoCusto = floatval($prod['precoCusto'] ?? 0);
-        $totalproduto  = ($quantidade * $precoVenda) - $desconto;
+        $totalproduto = ($quantidade * $precoVenda) - $desconto;
 
         $_SESSION['produtosVenda'][] = [
           'idProduto' => $idProduto,
@@ -60,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // carrega combos básicos
-$clientes   = $conn->query("SELECT id, nome FROM cliente WHERE idnAtivo = 1 ORDER BY nome");
-$condicoes  = $conn->query("SELECT id, descricao FROM condicao_pagamento WHERE idnAtivo = 1 ORDER BY descricao");
-$formaspag  = $conn->query("SELECT id, descricao FROM forma_pagamento WHERE idnAtivo = 1 ORDER BY descricao");
-$produtos   = $conn->query("SELECT id, descricao, precoVenda FROM produto WHERE idnAtivo = 1 ORDER BY descricao");
+$clientes = $conn->query("SELECT id, nome FROM cliente WHERE idnAtivo = 1 ORDER BY id");
+$condicoes = $conn->query("SELECT id, descricao FROM condicao_pagamento WHERE idnAtivo = 1 ORDER BY id");
+$formaspag = $conn->query("SELECT id, descricao FROM forma_pagamento WHERE idnAtivo = 1 ORDER BY id");
+$produtos = $conn->query("SELECT id, descricao, precoVenda FROM produto WHERE idnAtivo = 1 ORDER BY id");
 
 // calcula total da venda a partir dos itens
 $totalItens = 0;
@@ -79,6 +79,7 @@ if ($totalComDesconto < 0) $totalComDesconto = 0;
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <title>Nova Venda</title>
@@ -88,6 +89,8 @@ if ($totalComDesconto < 0) $totalComDesconto = 0;
 <body class="bg">
   <div class="wrap">
 
+    <div id="ok" class="notice" style="display:none;"></div>
+    <div id="erro" class="error" style="display:none;"></div>
     <div class="header">
       <div>Nova Venda</div>
       <a class="button" href="../home.php">Voltar</a>
@@ -101,31 +104,34 @@ if ($totalComDesconto < 0) $totalComDesconto = 0;
         <label>Cliente</label>
         <select name="idCliente" required>
           <option value="">Selecione</option>
-          <?php if ($clientes): while($c = $clientes->fetch_assoc()): ?>
-            <option value="<?= $c['id']; ?>" <?= (($_POST['idCliente'] ?? '') == $c['id']) ? 'selected' : ''; ?>>
-              <?= htmlspecialchars($c['nome']); ?>
-            </option>
-          <?php endwhile; endif; ?>
+          <?php if ($clientes): while ($c = $clientes->fetch_assoc()): ?>
+              <option value="<?= $c['id']; ?>" <?= (($_POST['idCliente'] ?? '') == $c['id']) ? 'selected' : ''; ?>>
+                <?= htmlspecialchars($c['nome']); ?>
+              </option>
+          <?php endwhile;
+          endif; ?>
         </select>
 
         <label>Condição de Pagamento</label>
         <select name="idCondicaoPagamento" required>
           <option value="">Selecione</option>
-          <?php if ($condicoes): while($c = $condicoes->fetch_assoc()): ?>
-            <option value="<?= $c['id']; ?>" <?= (($_POST['idCondicaoPagamento'] ?? '') == $c['id']) ? 'selected' : ''; ?>>
-              <?= htmlspecialchars($c['descricao']); ?>
-            </option>
-          <?php endwhile; endif; ?>
+          <?php if ($condicoes): while ($c = $condicoes->fetch_assoc()): ?>
+              <option value="<?= $c['id']; ?>" <?= (($_POST['idCondicaoPagamento'] ?? '') == $c['id']) ? 'selected' : ''; ?>>
+                <?= htmlspecialchars($c['descricao']); ?>
+              </option>
+          <?php endwhile;
+          endif; ?>
         </select>
 
         <label>Forma de Pagamento</label>
         <select name="idFormaPagamento" required>
           <option value="">Selecione</option>
-          <?php if ($formaspag): while($f = $formaspag->fetch_assoc()): ?>
-            <option value="<?= $f['id']; ?>" <?= (($_POST['idFormaPagamento'] ?? '') == $f['id']) ? 'selected' : ''; ?>>
-              <?= htmlspecialchars($f['descricao']); ?>
-            </option>
-          <?php endwhile; endif; ?>
+          <?php if ($formaspag): while ($f = $formaspag->fetch_assoc()): ?>
+              <option value="<?= $f['id']; ?>" <?= (($_POST['idFormaPagamento'] ?? '') == $f['id']) ? 'selected' : ''; ?>>
+                <?= htmlspecialchars($f['descricao']); ?>
+              </option>
+          <?php endwhile;
+          endif; ?>
         </select>
 
         <hr>
@@ -133,19 +139,20 @@ if ($totalComDesconto < 0) $totalComDesconto = 0;
         <h3>Adicionar Produto</h3>
 
         <label>Produto</label>
-        <select name="idProduto" required>
+        <select name="idProduto">
           <option value="">Selecione</option>
-          <?php if ($produtos): while($p = $produtos->fetch_assoc()): ?>
-            <option value="<?= $p['id']; ?>">
-              <?= htmlspecialchars($p['descricao']); ?>
-            </option>
-          <?php endwhile; endif; ?>
+          <?php if ($produtos): while ($p = $produtos->fetch_assoc()): ?>
+              <option value="<?= $p['id']; ?>" data-preco="<?= $p['precoVenda']; ?>">
+                <?= htmlspecialchars($p['descricao']); ?>
+              </option>
+          <?php endwhile;
+          endif; ?>
         </select>
 
         <label>Quantidade</label>
         <input type="number" name="quantidade" min="1" step="0.01" value="1">
 
-        <label>Preço (pode editar)</label>
+        <label>Preço</label>
         <input type="number" name="precoVenda" min="0" step="0.01">
 
         <label>Desconto do produto (R$)</label>
@@ -186,7 +193,9 @@ if ($totalComDesconto < 0) $totalComDesconto = 0;
                 </tr>
               <?php endforeach; ?>
             <?php else: ?>
-              <tr><td colspan="6">Nenhum produto adicionado ainda.</td></tr>
+              <tr>
+                <td colspan="6">Nenhum produto adicionado ainda.</td>
+              </tr>
             <?php endif; ?>
           </tbody>
         </table>
@@ -198,17 +207,17 @@ if ($totalComDesconto < 0) $totalComDesconto = 0;
         <p><strong>Total dos Itens:</strong> R$ <?= number_format($totalItens, 2, ',', '.'); ?></p>
 
         <label>Desconto Global (R$)</label>
-        <input type="number" name="descontoGlobal" min="0" step="0.01" 
-               value="<?= htmlspecialchars((string)$descontoGlobal); ?>">
+        <input type="number" name="descontoGlobal" min="0" step="0.01"
+          value="<?= htmlspecialchars((string)$descontoGlobal); ?>">
 
         <p><strong>Total da Venda:</strong> R$ <?= number_format($totalComDesconto, 2, ',', '.'); ?></p>
 
-        <!-- IMPORTANTE: este botão vai para funcoes.php, com os dados do cabeçalho e totais -->
+        <!-- Vai para funcoes.php, com os dados do cabeçalho e totais -->
         <button type="submit"
-                formaction="funcoes.php"
-                name="acao"
-                value="finalizarVenda"
-                style="margin-top:10px">
+          formaction="../funcoes.php"
+          name="acao"
+          value="finalizarVenda"
+          style="margin-top:10px">
           Finalizar Venda
         </button>
 
@@ -216,5 +225,17 @@ if ($totalComDesconto < 0) $totalComDesconto = 0;
     </div>
 
   </div>
+  </div> <!-- wrap -->
+
+  <script src="../assets/js/alertas.js"></script>
+
+  <script>
+    document.querySelector('select[name="idProduto"]').addEventListener('change', function() {
+      let preco = this.selectedOptions[0].getAttribute('data-preco');
+      document.querySelector('input[name="precoVenda"]').value = preco ? preco : '';
+    });
+  </script>
+
 </body>
+
 </html>

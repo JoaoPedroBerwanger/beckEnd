@@ -1,4 +1,8 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
 if (!isset($_SESSION['usuario_id'])) {
   header("Location: ../index.html");
   exit;
@@ -14,7 +18,7 @@ $select = $conn->query("SELECT id, descricao, idnAtivo FROM cliente_grupo ORDER 
 
 <head>
   <meta charset="UTF-8">
-  <title>Grupos de Parceiros</title>
+  <title>Grupos de Clientes</title>
   <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 
@@ -22,7 +26,7 @@ $select = $conn->query("SELECT id, descricao, idnAtivo FROM cliente_grupo ORDER 
   <div class="wrap">
 
     <div class="header">
-      <div>Grupos de Parceiros</div>
+      <div>Grupos de Clientes</div>
       <div><a class="button" href="../home.php">Voltar</a></div>
     </div>
 

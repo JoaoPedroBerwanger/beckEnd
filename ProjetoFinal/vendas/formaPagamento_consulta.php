@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario_id'])) {
   exit;
 }
 
-$regs = $conn->query("SELECT * FROM forma_pagamento ORDER BY descricao");
+$regs = $conn->query("SELECT * FROM forma_pagamento ORDER BY id");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -29,6 +29,8 @@ $regs = $conn->query("SELECT * FROM forma_pagamento ORDER BY descricao");
       <a class="button" href="../home.php">Voltar</a>
     </div>
 
+    <div id="ok" class="notice" style="display:none;"></div>
+    <div id="erro" class="error" style="display:none;"></div>
     <a class="button" href="formaPagamento_form.php?modo=novo">Nova Forma</a>
 
     <table class="table">
@@ -49,9 +51,8 @@ $regs = $conn->query("SELECT * FROM forma_pagamento ORDER BY descricao");
               <td><?= htmlspecialchars($r['descricao']) ?></td>
               <td><?= $r['idnAtivo'] ? 'Sim' : 'Não' ?></td>
               <td>
-                <a href="formaPagamento_form.php?modo=editar&id=<?= $r['id'] ?>">Editar</a>
-                |
-                <form method="POST" action="funcoes.php" style="display:inline;">
+                <a class="button" href="formaPagamento_form.php?modo=editar&id=<?= $r['id'] ?>">Editar</a>
+                <form method="POST" action="../funcoes.php" style="display:inline;">
                   <input type="hidden" name="acao" value="delFormaPagamento">
                   <input type="hidden" name="id" value="<?= $r['id'] ?>">
                   <button type="submit" onclick="return confirm('Excluir registro?')" class="button">Excluir</button>
@@ -68,6 +69,7 @@ $regs = $conn->query("SELECT * FROM forma_pagamento ORDER BY descricao");
     </table>
 
   </div>
+  <script src="../assets/js/alertas.js"></script>
 </body>
 
 </html>

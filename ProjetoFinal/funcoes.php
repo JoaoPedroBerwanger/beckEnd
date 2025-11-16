@@ -34,6 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["acao"])) {
     case "editGrupoCliente": editGrupoCliente(); break;
     case "delGrupoCliente": delGrupoCliente(); break;
 
+    case "addGrupoProduto": addGrupoProduto(); break;
+    case "editGrupoProduto": editGrupoProduto(); break;
+    case "delGrupoProduto": delGrupoProduto(); break;
+
     case 'addProduto': addProduto(); break;
     case 'editProduto': editProduto(); break;
     case 'delProduto': delProduto(); break;
@@ -61,7 +65,7 @@ function finalizarVenda() {
   session_start();
 
   if (empty($_SESSION['produtosVenda'])) {
-    header("Location: venda_form.php?erro=sem_itens");
+    header("Location: vendas/venda_form.php?erro=sem_itens");
     
     exit;
   }
@@ -73,7 +77,7 @@ function finalizarVenda() {
   $idUsuario = intval($_SESSION['usuario_id'] ?? 0);
 
   if ($idCliente <= 0 || $idCondicaoPagamento <= 0 || $idFormaPagamento <= 0 || $idUsuario <= 0) {
-    header("Location: venda_form.php?erro=dados");
+    header("Location: vendas/venda_form.php?erro=dados");
     exit;
   }
 
@@ -97,7 +101,7 @@ function finalizarVenda() {
       VALUES ($prox, $idCliente, $idCondicaoPagamento, $idFormaPagamento, $totalVenda, NOW(), $idUsuario, 0)";
 
   if (!$conn->query($insertVenda)) {
-    header("Location: venda_form.php?erro=db");
+    header("Location: vendas/venda_form.php?erro=db");
     exit;
   }
 
@@ -121,7 +125,7 @@ function finalizarVenda() {
   // limpa os produtos da sessão
   $_SESSION['produtosVenda'] = [];
 
-  header("Location: venda_consulta.php?msg=ok");
+  header("Location: vendas/venda_form.php?msg=ok");
   exit;
 }
 
@@ -132,7 +136,7 @@ function cancelarVenda() {
   $id = intval($_POST['id'] ?? 0);
 
   if ($id <= 0) {
-    header("Location: venda_consulta.php?erro=id");
+    header("Location: vendas/venda_consulta.php?erro=id");
     exit;
   }
 
@@ -140,9 +144,9 @@ function cancelarVenda() {
   $query = "UPDATE vendas SET idnCancelada = 1 WHERE id = $id";
 
   if ($conn->query($query)) {
-    header("Location: venda_consulta.php?msg=cancelada");
+    header("Location: vendas/venda_consulta.php?msg=cancelada");
   } else {
-    header("Location: venda_consulta.php?erro=db");
+    header("Location: vendas/venda_consulta.php?erro=db");
   }
 
   exit;
@@ -240,7 +244,7 @@ function addUsuarioLogin() {
           VALUES ('$nome', '$login', '$senhaMd5', 1)";
   
   if ($conn->query($query)) {
-    header("Location: ../index.html?msg=ok");
+    header("Location: index.html?msg=ok");
   } else {
     header("Location: usuario/usuarioLogin_form.php?erro=db");
   }
@@ -490,7 +494,7 @@ function excluirProduto($id) {
 function listarMarcas() {
   global $conn;
 
-  $consulta = $conn->query("SELECT id, descricao FROM marca ORDER BY descricao");
+  $consulta = $conn->query("SELECT id, descricao FROM marca WHERE idnAtivo = 1 ORDER BY id");
   
   return $consulta ? $consulta->fetch_all(MYSQLI_ASSOC) : [];
 }
@@ -498,7 +502,7 @@ function listarMarcas() {
 function listarGruposProduto() {
   global $conn;
 
-  $consulta = $conn->query("SELECT id, descricao FROM produto_grupo ORDER BY descricao");
+  $consulta = $conn->query("SELECT id, descricao FROM produto_grupo WHERE idnAtivo = 1 ORDER BY id");
   
   return $consulta ? $consulta->fetch_all(MYSQLI_ASSOC) : [];
 }

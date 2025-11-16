@@ -45,7 +45,7 @@ if ($modo === 'editar' && $id > 0) {
 
     <div class="header">
       <div><?= $modo === "editar" ? "Editar Produto" : "Novo Produto" ?></div>
-      <a class="button" href="produto_consulta.php">⟵ Voltar</a>
+      <a class="button" href="produto_consulta.php">Voltar</a>
     </div>
 
     <div class="form-card">
@@ -72,7 +72,7 @@ if ($modo === 'editar' && $id > 0) {
 
         <label>Marca</label>
         <select name="idMarcaProduto">
-          <option value="">-- Selecione --</option>
+          <option value="">Selecione</option>
           <?php foreach (listarMarcas() as $m): ?>
             <option value="<?= $m['id'] ?>"
               <?= $produto['idMarcaProduto'] == $m['id'] ? 'selected' : '' ?>>
@@ -83,7 +83,7 @@ if ($modo === 'editar' && $id > 0) {
 
         <label>Grupo de Produto</label>
         <select name="idGrupoProduto">
-          <option value="">-- Selecione --</option>
+          <option value="">Selecione</option>
           <?php foreach (listarGruposProduto() as $g): ?>
             <option value="<?= $g['id'] ?>"
               <?= $produto['idGrupoProduto'] == $g['id'] ? 'selected' : '' ?>>

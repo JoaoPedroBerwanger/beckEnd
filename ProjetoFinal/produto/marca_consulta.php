@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
 include "../funcoes.php";
 
-$select = $conn->query("SELECT id, descricao, idnAtivo FROM marca ORDER BY descricao");
+$select = $conn->query("SELECT id, descricao, idnAtivo FROM marca ORDER BY id");
 ?>
 
 <!DOCTYPE html>

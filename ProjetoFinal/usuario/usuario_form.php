@@ -13,6 +13,7 @@ if ($id > 0) {
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <title><?= $modo === 'editar' ? 'Editar Usuário' : 'Novo Usuário' ?></title>
@@ -21,8 +22,9 @@ if ($id > 0) {
 </head>
 
 <body class="bg">
-  <div class="card">
-    <div id="loginDuplicado" class="error" style="display: none"></div>
+  <div class="form-card">
+    <div id="ok" class="notice" style="display:none;"></div>
+    <div id="erro" class="error" style="display:none;"></div>
     <h2><?= $modo === 'editar' ? 'Editar Usuário' : 'Novo Usuário' ?></h2>
 
     <form method="POST" action="../funcoes.php">
@@ -50,9 +52,10 @@ if ($id > 0) {
       <div class="actions">
         <input type="hidden" name="acao" value="<?= $modo === 'editar' ? 'editarUsuario' : 'addUsuario' ?>">
         <button type="submit" name="salvar">Salvar</button>
-        <a class="button" href="usuario/usuario_consulta.php">Cancelar</a>
+        <a class="button" href="usuario_consulta.php">Cancelar</a>
       </div>
     </form>
   </div>
 </body>
+
 </html>

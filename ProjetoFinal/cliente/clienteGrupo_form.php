@@ -1,11 +1,14 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ../index.html");
-    exit;
+  header("Location: ../index.html");
+  exit;
 }
 
 require_once '../funcoes.php';
-
 $modo = $_GET['modo'] ?? 'novo';
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 

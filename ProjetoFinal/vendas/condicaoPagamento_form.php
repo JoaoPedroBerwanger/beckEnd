@@ -37,6 +37,8 @@ if ($modo === 'editar' && $id > 0) {
 
 <body class="bg">
   <div class="wrap">
+    <div id="ok" class="notice" style="display:none;"></div>
+    <div id="erro" class="error" style="display:none;"></div>
 
     <div class="header">
       <div><?= $modo === 'editar' ? 'Editar Condição de Pagamento' : 'Nova Condição de Pagamento' ?></div>
@@ -44,10 +46,10 @@ if ($modo === 'editar' && $id > 0) {
     </div>
 
     <div class="form-card">
-      <form method="POST" action="funcoes.php">
+      <form method="POST" action="../funcoes.php">
 
-        <input type="hidden" name="acao" 
-               value="<?= $modo === 'editar' ? 'editCondicaoPagamento' : 'addCondicaoPagamento' ?>">
+        <input type="hidden" name="acao"
+          value="<?= $modo === 'editar' ? 'editCondicaoPagamento' : 'addCondicaoPagamento' ?>">
 
         <input type="hidden" name="id" value="<?= $reg['id'] ?>">
 
@@ -68,5 +70,7 @@ if ($modo === 'editar' && $id > 0) {
     </div>
 
   </div>
+  <script src="../assets/js/alertas.js"></script>
 </body>
+
 </html>

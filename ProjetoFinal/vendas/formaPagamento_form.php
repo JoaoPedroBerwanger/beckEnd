@@ -43,11 +43,14 @@ if ($modo === 'editar' && $id > 0) {
       <a class="button" href="formaPagamento_consulta.php">Voltar</a>
     </div>
 
-    <div class="form-card">
-      <form method="POST" action="funcoes.php">
+    <div id="ok" class="notice" style="display:none;"></div>
+    <div id="erro" class="error" style="display:none;"></div>
 
-        <input type="hidden" name="acao" 
-               value="<?= $modo === 'editar' ? 'editFormaPagamento' : 'addFormaPagamento' ?>">
+    <div class="form-card">
+      <form method="POST" action="../funcoes.php">
+
+        <input type="hidden" name="acao"
+          value="<?= $modo === 'editar' ? 'editFormaPagamento' : 'addFormaPagamento' ?>">
 
         <input type="hidden" name="id" value="<?= $reg['id'] ?>">
 
@@ -68,5 +71,7 @@ if ($modo === 'editar' && $id > 0) {
     </div>
 
   </div>
+  <script src="../assets/js/alertas.js"></script>
 </body>
+
 </html>

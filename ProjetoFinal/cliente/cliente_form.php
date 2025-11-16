@@ -34,7 +34,7 @@ if ($modo === 'editar' && $id > 0) {
   }
 }
 
-$grupos  = $conn->query("SELECT id, descricao FROM cliente_grupo WHERE idnAtivo = 1 ORDER BY descricao");
+$grupos  = $conn->query("SELECT id, descricao FROM cliente_grupo WHERE idnAtivo = 1 ORDER BY id");
 ?>
 
 <!DOCTYPE html>
@@ -44,11 +44,13 @@ $grupos  = $conn->query("SELECT id, descricao FROM cliente_grupo WHERE idnAtivo 
   <meta charset="UTF-8">
   <title><?= $modo === 'editar' ? 'Editar Cliente' : 'Novo Cliente' ?></title>
   <link rel="stylesheet" href="../assets/css/estilo.css">
-  <script src="../assets/js/alertas.js"></script>
 </head>
 
 <body class="bg">
   <div class="wrap">
+
+    <div id="ok" class="notice" style="display:none;"></div>
+    <div id="erro" class="error" style="display:none;"></div>
 
     <div class="header">
       <div><?= $modo === 'editar' ? 'Editar Cliente' : 'Novo Cliente' ?></div>
@@ -117,6 +119,7 @@ $grupos  = $conn->query("SELECT id, descricao FROM cliente_grupo WHERE idnAtivo 
     </div>
 
   </div>
+  <script src="../assets/js/alertas.js"></script>
 </body>
 
 </html>

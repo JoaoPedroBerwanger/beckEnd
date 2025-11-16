@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
 require_once '../funcoes.php';
 
-$grupos = $conn->query("SELECT * FROM produto_grupo ORDER BY descricao");
+$grupos = $conn->query("SELECT * FROM produto_grupo ORDER BY id");
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +51,7 @@ $grupos = $conn->query("SELECT * FROM produto_grupo ORDER BY descricao");
                 <td><?= htmlspecialchars($g['descricao']) ?></td>
                 <td><?= $g['idnAtivo'] ?></td>
                 <td>
-                  <a href="produtoGrupo_form.php?modo=editar&id=<?= $g['id'] ?>">Editar</a>
+                  <a class="button" href="produtoGrupo_form.php?modo=editar&id=<?= $g['id'] ?>">Editar</a>
                   <form method="POST" action="../funcoes.php" style="display:inline">
                     <input type="hidden" name="acao" value="delGrupoProduto">
                     <input type="hidden" name="id" value="<?= $g['id'] ?>">

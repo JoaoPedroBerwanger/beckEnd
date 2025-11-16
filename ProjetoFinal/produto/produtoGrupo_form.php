@@ -54,12 +54,19 @@ if ($modo === 'editar' && $id > 0) {
         <input type="text" name="descricao" required
           value="<?= htmlspecialchars($grupo['descricao']) ?>">
 
-        <label>Ativo</label>
-        <input type="text" name="idnAtivo" value="<?= $grupo['idnAtivo'] ?>">
+        <?php if ($modo === 'editar'): ?>
+          <label>Ativo</label>
+          <select name="idnAtivo">
+            <option value="1" <?= $grupo['idnAtivo'] ? 'selected' : '' ?>>Sim</option>
+            <option value="0" <?= !$grupo['idnAtivo'] ? 'selected' : '' ?>>Não</option>
+          </select>
+        <?php endif; ?>
 
 
-        <button type="submit">Salvar</button>
-        <a class="button" href="produtoGrupo_consulta.php">Cancelar</a>
+        <div class="actions">
+          <button type="submit" class="button green">Salvar</button>
+          <a class="button" href="produtoGrupo_consulta.php">Cancelar</a>
+        </div>
       </form>
 
     </div>

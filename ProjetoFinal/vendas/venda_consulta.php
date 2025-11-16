@@ -19,7 +19,7 @@ $res = $conn->query("
   LEFT JOIN cliente c ON c.id = v.idCliente
   LEFT JOIN condicao_pagamento cp ON cp.id = v.idCondicaoPagamento
   LEFT JOIN forma_pagamento fp ON fp.id = v.idFormaPagamento
-  ORDER BY v.id DESC
+  ORDER BY v.id
 ");
 ?>
 
@@ -76,20 +76,13 @@ $res = $conn->query("
 
               <td>
 
-                <!-- Ver itens da venda -->
-                <a href="venda_itens.php?id=<?= $v['id'] ?>">Itens</a>
+                <a class="button" href="venda_itens.php?id=<?= $v['id'] ?>">Itens</a>
 
                 <?php if (!$v['idnCancelada']): ?>
-                  |
-                  <!-- Cancelar a venda -->
-                  <form method="POST" action="funcoes.php" style="display:inline;">
+                  <form method="POST" action="../funcoes.php" style="display:inline;">
                     <input type="hidden" name="acao" value="cancelarVenda">
                     <input type="hidden" name="id" value="<?= $v['id'] ?>">
-                    <button type="submit"
-                      class="button"
-                      onclick="return confirm('Cancelar esta venda? Isso não poderá ser desfeito!')">
-                      Cancelar
-                    </button>
+                    <button type="submit" class="button" onclick="return confirm('Cancelar esta venda? Isso não poderá ser desfeito!')">Cancelar</button>
                   </form>
                 <?php endif; ?>
 
