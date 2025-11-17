@@ -292,7 +292,7 @@ function delUsuario() {
 
   $conn->query("UPDATE usuario SET idnAtivo = 0 WHERE id = $id");
   header("Location: usuario/usuario_consulta.php?msg=desativado");
-  
+    
   exit;
 }
 
@@ -329,14 +329,27 @@ function editCliente() {
   $id = intval($_POST['id']);
   $nome = trim($_POST['nome']);
   $cpfCnpj = trim($_POST['cpfCnpj']);
+  $rua = trim($_POST['rua']);
+  $bairro = trim($_POST['bairro']);
+  $numero = intval($_POST['numero']);
+  $cep = trim($_POST['cep']);
   $email = trim($_POST['email']);
-  $idGrupoCliente = intval($_POST['idGrupoCliente']);
+  $idGrupoCliente = isset($_POST['idGrupoCliente']) && intval($_POST['idGrupoCliente']) > 0 ? intval($_POST['idGrupoCliente']) : null;
+  $idGrupoClienteQuery = $idGrupoCliente !== null ? $idGrupoCliente : "NULL";
   $idnAtivo = intval($_POST['idnAtivo']);
 
   $query = "UPDATE cliente 
-          SET nome='$nome', cpfCnpj='$cpfCnpj', email='$email', 
-              idGrupoCliente=$idGrupoCliente, idnAtivo=$idnAtivo
-          WHERE id=$id";
+            SET 
+              nome = '$nome', 
+              cpfCnpj = '$cpfCnpj', 
+              rua = '$rua',
+              bairro = '$bairro',
+              numero = $numero,
+              cep = '$cep',
+              email = '$email', 
+              idGrupoCliente = $idGrupoClienteQuery,
+              idnAtivo = $idnAtivo
+            WHERE id = $id";
 
   if ($conn->query($query)) {
     header("Location: cliente/cliente_consulta.php?msg=ok");
@@ -351,17 +364,23 @@ function delCliente() {
   global $conn;
 
   $id = intval($_POST['id']);
-  
-  if ($conn->query("DELETE FROM cliente WHERE id=$id")) {
-    header("Location: cliente/cliente_consulta.php?msg=ok");
-    
+
+  $q = $conn->query("SELECT COUNT(*) AS total FROM vendas WHERE idCliente = $id");
+  $r = $q->fetch_assoc();
+
+  if ($r['total'] == 0) {
+    if ($conn->query("DELETE FROM cliente WHERE id = $id")) {
+      header("Location: cliente/cliente_consulta.php?msg=excluido");
+      exit;
+    } else {
+      header("Location: cliente/cliente_consulta.php?erro=db");
+      exit;
+    }
+  } else {
+    $conn->query("UPDATE cliente SET idnAtivo = 0 WHERE id = $id");
+    header("Location: cliente/cliente_consulta.php?msg=desativado");
     exit;
   }
-
-  $conn->query("UPDATE cliente SET idnAtivo=0 WHERE id=$id");
-  header("Location: cliente/cliente_consulta.php?msg=desativado");
-  
-  exit;
 }
 
 function addGrupoCliente() {
@@ -406,19 +425,31 @@ function editGrupoCliente() {
 
 function delGrupoCliente() {
   global $conn;
-  
+
   $id = intval($_POST['id']);
 
-  if ($conn->query("DELETE FROM cliente_grupo WHERE id=$id")) {
-    header("Location: cliente/clienteGrupo_consulta.php?msg=ok");
-    
+  if ($id <= 0) {
+    header("Location: cliente/clienteGrupo_consulta.php?erro=id");
     exit;
   }
 
-  $conn->query("UPDATE cliente_grupo SET idnAtivo = 0 WHERE id=$id");
-  header("Location: cliente/clienteGrupo_consulta.php?msg=desativado");
-  
-  exit;
+  $q = $conn->query("SELECT COUNT(*) AS total FROM cliente WHERE idGrupoCliente = $id");
+  $r = $q->fetch_assoc();
+
+  if ($r['total'] == 0) {
+      // Pode excluir o grupo
+      if ($conn->query("DELETE FROM cliente_grupo WHERE id = $id")) {
+        header("Location: cliente/clienteGrupo_consulta.php?msg=excluido");
+        exit;
+      } else {
+        header("Location: cliente/clienteGrupo_consulta.php?erro=db");
+        exit;
+      }
+  } else {
+      $conn->query("UPDATE cliente_grupo SET idnAtivo = 0 WHERE id = $id");
+      header("Location: cliente/clienteGrupo_consulta.php?msg=desativado");
+      exit;
+  }
 }
 
 function listarMarcas() {
@@ -531,16 +562,27 @@ function delGrupoProduto() {
 
   $id = intval($_POST['id']);
 
-  if ($conn->query("DELETE FROM produto_grupo WHERE id=$id")) {
-    header("Location: produto/produtoGrupo_consulta.php?msg=ok");
-
+  if ($id <= 0) {
+    header("Location: produto/produtoGrupo_consulta.php?erro=id");
     exit;
   }
 
-  $conn->query("UPDATE produto_grupo SET idnAtivo = 0 WHERE id=$id");
-  header("Location: produto/produtoGrupo_consulta.php?msg=desativado");
+  $q = $conn->query("SELECT COUNT(*) AS grupos FROM produto WHERE idGrupoProduto = $id");
+  $r = $q->fetch_assoc();
 
-  exit;
+  if ($r['grupos'] == 0) {
+      if ($conn->query("DELETE FROM produto_grupo WHERE id = $id")) {
+        header("Location: produto/produtoGrupo_consulta.php?msg=excluido");
+        exit;
+      } else {
+        header("Location: produto/produtoGrupo_consulta.php?erro=db");
+        exit;
+      }
+  } else {
+      $conn->query("UPDATE produto_grupo SET idnAtivo = 0 WHERE id = $id");
+      header("Location: produto/produtoGrupo_consulta.php?msg=desativado");
+      exit;
+  }
 }
 
 function addCondicaoPagamento() {
@@ -718,13 +760,21 @@ function delProduto() {
     exit;
   }
 
-  if ($conn->query("DELETE FROM produto WHERE id=$id")) {
-    header("Location: produto/produto_consulta.php?msg=ok");
-    exit;
+  $q = $conn->query("SELECT COUNT(*) AS total FROM venda_produtos WHERE idProduto = $id");
+  $r = $q->fetch_assoc();
+
+  if ($r['total'] == 0) {
+      if ($conn->query("DELETE FROM produto WHERE id=$id")) {
+          header("Location: produto/produto_consulta.php?msg=excluido");
+          exit;
+      } else {
+          header("Location: produto/produto_consulta.php?erro=db");
+          exit;
+      }
+  } 
+  else {
+      $conn->query("UPDATE produto SET idnAtivo = 0 WHERE id=$id");
+      header("Location: produto/produto_consulta.php?msg=desativado");
+      exit;
   }
-
-  $conn->query("UPDATE produto SET idnAtivo = 0 WHERE id=$id");
-
-  header("Location: produto/produto_consulta.php?msg=desativado");
-  exit;
 }

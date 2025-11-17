@@ -31,6 +31,8 @@ $grupos = $conn->query("SELECT * FROM produto_grupo ORDER BY id");
         <div><a class="button" href="../home.php">Voltar</a></div>
       </div>
 
+      <div id="ok" class="notice" style="display:none;"></div>
+      <div id="erro" class="error" style="display:none;"></div>
       <a class="button" href="produtoGrupo_form.php?modo=novo">Novo Grupo</a>
 
       <table class="table">
@@ -49,7 +51,7 @@ $grupos = $conn->query("SELECT * FROM produto_grupo ORDER BY id");
               <tr>
                 <td><?= $g['id'] ?></td>
                 <td><?= htmlspecialchars($g['descricao']) ?></td>
-                <td><?= $g['idnAtivo'] ?></td>
+                <td><?= $g['idnAtivo'] == 1 ? 'Sim' : 'Não' ?></td>
                 <td>
                   <a class="button" href="produtoGrupo_form.php?modo=editar&id=<?= $g['id'] ?>">Editar</a>
                   <form method="POST" action="../funcoes.php" style="display:inline">
