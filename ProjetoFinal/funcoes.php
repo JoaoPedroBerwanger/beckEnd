@@ -437,7 +437,6 @@ function delGrupoCliente() {
   $r = $q->fetch_assoc();
 
   if ($r['total'] == 0) {
-      // Pode excluir o grupo
       if ($conn->query("DELETE FROM cliente_grupo WHERE id = $id")) {
         header("Location: cliente/clienteGrupo_consulta.php?msg=excluido");
         exit;
