@@ -11,7 +11,7 @@
 @endif
 
 @if (!empty($enviado))
-    <p>Obrigado, <strong>{{ $dados['nome'] }}</strong>! Sua avaliação foi: <strong>{{ $dados['avaliacao'] }}/5</strong></p>
+    <p>Obrigado, {{ $dados['nome'] }}! Sua avaliação foi: {{ $dados['avaliacao'] }}/5</p>
 @else
     <form method="POST" action="/feedback">
         @csrf

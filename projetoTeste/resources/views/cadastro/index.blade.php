@@ -11,7 +11,7 @@
 @endif
 
 @if (!empty($cadastrado))
-    <p>Cadastro realizado com sucesso! Bem-vindo(a), <strong>{{ $nome }}</strong>!</p>
+    <p>Cadastro realizado com sucesso! Bem-vindo(a), {{ $nome }}!</p>
 @else
     <form method="POST" action="/cadastro">
         @csrf

@@ -12,20 +12,23 @@ class EnqueteController extends Controller
     {
         $votos = session('votos', array_fill_keys(self::OPCOES, 0));
         $totalVotos = array_sum($votos);
-        return view('enquete.index', [
-            'opcoes'     => self::OPCOES,
-            'votos'      => $votos,
+        return view('enquete.index', 
+        [
+            'opcoes' => self::OPCOES,
+            'votos' => $votos,
             'totalVotos' => $totalVotos,
         ]);
     }
 
     public function votar(Request $request)
     {
-        $request->validate([
+        $request->validate(
+        [
             'opcao' => 'required|in:' . implode(',', self::OPCOES),
-        ], [
+        ], 
+        [
             'opcao.required' => 'Selecione uma opção.',
-            'opcao.in'       => 'Opção inválida.',
+            'opcao.in' => 'Opção inválida.',
         ]);
 
         $votos = session('votos', array_fill_keys(self::OPCOES, 0));

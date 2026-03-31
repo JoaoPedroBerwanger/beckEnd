@@ -23,7 +23,7 @@
 </form>
 
 @isset($resultado)
-    <p>{{ $temp }}° ({{ $de }}) = <strong>{{ number_format($resultado, 2, ',', '.') }}° ({{ $para }})</strong></p>
+    <p>{{ $temp }}° ({{ $de }}) = {{ number_format($resultado, 2, ',', '.') }}° ({{ $para }})</p>
 @endisset
 
 @endsection

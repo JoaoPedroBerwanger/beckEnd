@@ -13,13 +13,12 @@ class TabuadaController extends Controller
 
     public function calcular(Request $request)
     {
-        $request->validate([
-            'numero' => 'required|integer|min:0|max:20',
-        ], [
+        $request->validate(['numero' => 'required|integer|min:0|max:20',], 
+        [
             'numero.required' => 'Informe um número.',
-            'numero.integer'  => 'O valor deve ser um número inteiro.',
-            'numero.min'      => 'O número deve ser pelo menos 0.',
-            'numero.max'      => 'O número deve ser no máximo 20.',
+            'numero.integer' => 'O número deve ser inteiro.',
+            'numero.min' => 'Informe um número de 0 a 20.',
+            'numero.max' => 'Informe um número de 0 a 20.',
         ]);
 
         $numero = (int) $request->numero;

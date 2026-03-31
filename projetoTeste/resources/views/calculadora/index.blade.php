@@ -31,12 +31,8 @@
     <button type="submit">Calcular</button>
 </form>
 
-@isset($erro)
-    <p style="color:red">{{ $erro }}</p>
-@endisset
-
 @isset($resultado)
-    <p>Resultado: {{ $num1 }} {{ $operacao }} {{ $num2 }} = <strong>{{ $resultado }}</strong></p>
+    <p>Resultado: {{ $num1 }} {{ $operacao }} {{ $num2 }} = {{ $resultado }}</p>
 @endisset
 
 @endsection

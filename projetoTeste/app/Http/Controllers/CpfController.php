@@ -13,19 +13,22 @@ class CpfController extends Controller
 
     public function validar(Request $request)
     {
-        $request->validate([
+        $request->validate(
+        [
             'cpf' => 'required|string',
-        ], [
+        ], 
+        [
             'cpf.required' => 'Informe um CPF.',
         ]);
 
-        $cpf    = $request->cpf;
+        $cpf = $request->cpf;
         $valido = $this->validarCpf($cpf);
         $cpfFormatado = $cpf;
 
         return view('cpf.index', compact('cpf', 'cpfFormatado', 'valido'));
     }
 
+    // function copida da internet
     private function validarCpf(string $cpf): bool
     {
         // Remove formatação
